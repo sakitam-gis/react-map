@@ -1,10 +1,12 @@
-import '../styles/index.scss'
+import '../style/index.scss';
 import React from 'react';
+import logo from '../assets/logo.svg'
 class AppComponent extends React.Component {
-  render() {
+  render () {
     return (
       <div className="index">
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+        <img src={logo} alt=""/>
+        <div className="notice">react</div>
       </div>
     );
   }

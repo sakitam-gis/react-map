@@ -1,18 +1,16 @@
 'use strict'
 const path = require('path')
 const utils = require('./utils')
-const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
+const config = require('./config')
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
-
+/**
+ * 添加eslint 代码检查
+ **/
 const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
+  test: /(\.jsx|\.js)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
-  include: [resolve('src'), resolve('example'), resolve('test')],
+  include: [utils.resolve('src')],
   options: {
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
@@ -22,36 +20,31 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: '../src/index.js'
+    app: './src/index.js'
   },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath: config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('example'),
-      'src': resolve('src'),
-      'components': resolve('src/components')
+      'src': utils.resolve('src'),
+      'style': utils.resolve('style'),
+      'components': utils.resolve('src/components')
     }
   },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
-      {
-        test: /\.js$/,
+        test: /(\.jsx|\.js)$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('example'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [
+          utils.resolve('src'),
+          utils.resolve('node_modules/webpack-dev-server/client')
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -80,11 +73,7 @@ module.exports = {
     ]
   },
   node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
     setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
     dgram: 'empty',
     fs: 'empty',
     net: 'empty',
