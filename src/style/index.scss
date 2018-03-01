@@ -1,20 +1,48 @@
-body {
-  color: #fff;
-  background: #222;
+@import "./theme.scss";
+html, body {
+  background-color: $body-background;
+  color: $text-color;
 }
 
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+ul, li {
+  list-style: none;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  visibility: hidden;
   display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }
-
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
-  text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+:focus {
+  outline: none;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+.map-content {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: $font-family;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  color: $text-color-secondary;
 }

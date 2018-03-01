@@ -23,6 +23,9 @@ module.exports = {
   // add your custom rules here
   rules: {
     'indent': ['off', 2],
+    // allow key-spacing
+    'key-spacing': 'off',
+    // allow semi
     'semi': 'off',
     // allow async-await
     'generator-star-spacing': 'off',
