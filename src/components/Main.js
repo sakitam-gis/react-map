@@ -4,7 +4,7 @@ import 'maptalks/dist/maptalks.css'
 import React, { Component } from 'react';
 // eslint-disable-next-line
 import LayerSwitcher from './LayerSwitcher'
-import * as maptalks from 'maptalks';
+import * as maptalks from 'maptalks/dist/maptalks';
 class Main extends Component {
   // 初始化页面常量 绑定事件方法
   constructor (props, context) {
