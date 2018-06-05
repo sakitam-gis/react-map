@@ -2,17 +2,6 @@ import '../style/layer-switcher.scss'
 // eslint-disable-next-line
 import React, { Component } from 'react';
 
-const fixStyle = (item, index) => {
-  return {
-    background: 'url(' + item['icon'] + ') 0px 0px no-repeat',
-    zIndex: index + 1
-  }
-};
-
-const getClassName = (flag) => {
-  return flag ? 'selected-item layer-switcher-li' : 'layer-switcher-li'
-}
-
 class LayerSwitcher extends Component {
   // 初始化页面常量 绑定事件方法
   constructor (props, context) {
@@ -22,24 +11,42 @@ class LayerSwitcher extends Component {
   componentDidMount () {
   }
 
-  switchLayer () {
-    console.log(event)
+  switchLayer (item) {
+    const _layers = this.props.map.getLayer('BaseLayer').getLayers();
+    _layers.forEach(layer => {
+      if (layer.getId() === item.layerName) {
+        layer.show();
+      } else {
+        layer.hide();
+      }
+    })
   }
 
   getList () {
     return this.props.layers.map((item, index) => {
       return (
         <li key={index}
-            className={getClassName((item.layerName === this.selectLayerName), index)}
-            style={fixStyle(item, index)} onClick={() => this.switchLayer()}>
+            className={this.getClassName((item.layerName === this.selectLayerName), index)}
+            style={this.fixStyle(item, index)} onClick={() => this.switchLayer(item)}>
           <span className="layer-name">{item.layerName}</span>
         </li>
       )
     });
   }
 
+  fixStyle (item, index) {
+    return {
+      background: 'url(' + item['icon'] + ') 0px 0px no-repeat',
+      zIndex: index + 1
+    }
+  }
+
+  getClassName (flag) {
+    return flag ? 'selected-item layer-switcher-li' : 'layer-switcher-li'
+  };
+
   render () {
-    const listItems = this.getList()
+    const listItems = this.getList();
     return (
       <div className="layer-switcher">
         <ul className="layer-switcher-ul">

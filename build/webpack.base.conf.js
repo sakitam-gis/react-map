@@ -2,6 +2,7 @@
 const path = require('path')
 const utils = require('./utils')
 const config = require('./config')
+const nodeExternals = require('webpack-node-externals')
 
 /**
  * 添加eslint 代码检查
@@ -25,7 +26,10 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: config.dev.assetsPublicPath
+    publicPath: config.dev.assetsPublicPath,
+    library: undefined,
+    libraryTarget: 'var',
+    umdNamedDefine: false
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -42,8 +46,7 @@ module.exports = {
         test: /(\.jsx|\.js)$/,
         loader: 'babel-loader',
         include: [
-          utils.resolve('src'),
-          utils.resolve('node_modules/webpack-dev-server/client')
+          utils.resolve('src')
         ]
       },
       {
@@ -91,5 +94,6 @@ module.exports = {
         }
       }
     }
-  }
+  },
+  externals: []
 }
