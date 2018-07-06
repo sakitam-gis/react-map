@@ -1,6 +1,6 @@
-components/**/*.js
-components/**/*.jsx
-components/*/__tests__/type.tsx
+src/**/*.js
+src/**/*.jsx
+src/*/__tests__/type.tsx
 !.eslintrc.js
-!components/*/__tests__/**/*.js
-!components/*/demo/*
+!src/*/__tests__/**/*.js
+!src/*/demo/*
