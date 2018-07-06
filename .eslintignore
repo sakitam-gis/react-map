@@ -1,3 +1,6 @@
-/build/
-/dist/
-/*.js
+components/**/*.js
+components/**/*.jsx
+components/*/__tests__/type.tsx
+!.eslintrc.js
+!components/*/__tests__/**/*.js
+!components/*/demo/*
