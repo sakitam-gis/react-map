@@ -3,9 +3,24 @@ const rm = require('rimraf');
 const path = require('path');
 const chalk = require('chalk');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.dev.conf');
+const webpackConfig = require('./webpack.conf');
 
-const spinner = ora('building for production...');
+const spinner = ora({
+  text: 'building for production...',
+  spinner: {
+    'interval': 80,
+    'frames': [
+      '⣾',
+      '⣽',
+      '⣻',
+      '⢿',
+      '⡿',
+      '⣟',
+      '⣯',
+      '⣷'
+    ]
+  }
+});
 spinner.start();
 
 rm(path.join('../dist'), err => {

@@ -12,6 +12,9 @@ const createLintingRule = () => ({
   },
 });
 
+const filename = process.env.NODE_ENV === 'production' ? 'min.' : (process.env.NODE_ENV === 'common' ? 'common.' : '');
+const _target = process.env.NODE_ENV === 'common' ? 'commonjs2' : 'umd2';
+
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
@@ -19,8 +22,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: `[name].${process.env.NODE_ENV === 'production' ? 'min.' : ''}js`,
-    libraryTarget: 'umd'
+    filename: `[name].${filename}js`,
+    libraryTarget: _target
   },
   resolve: {
     extensions: [

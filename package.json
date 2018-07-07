@@ -20,8 +20,10 @@
   "bugs": {
     "url": "https://github.com/sakitam-gis/react-map/issues"
   },
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "dist/react-map.common.js",
+  "module": "dist/react-map.esm.js",
+  "unpkg": "dist/react-map.js",
+  "style": "dist/react-map.css",
   "files": [
     "dist",
     "lib",
@@ -113,6 +115,10 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node build/build.js",
     "dist": "cross-env NODE_ENV=production node build/build.js",
+    "dist:common": "cross-env NODE_ENV=common node build/build.js",
+    "dist:esm": "cross-env NODE_ENV=esm node build/build.js",
+    "tsc": "tsc",
+    "prettify": "prettier --write src/*.ts src/*.tsx src/**/*.ts src/**/*.tsx example/src/**/*.ts example/src/**/*.tsx",
     "lint": "npm run lint:ts && npm run lint:es && npm run lint:demo && npm run lint:style",
     "lint:ts": "npm run tsc && antd-tools run ts-lint",
     "lint:es": "eslint tests site scripts components ./.eslintrc.js ./webpack.config.js --ext '.js,.jsx'",
@@ -122,9 +128,6 @@
     "lint-fix": "npm run lint-fix:code && npm run lint-fix:demo",
     "lint-fix:code": "eslint --fix tests site scripts components ./.eslintrc.js ./webpack.config.js --ext '.js,.jsx'",
     "lint-fix:demo": "eslint-tinker ./components/*/demo/*.md",
-    "compile": "antd-tools run compile",
-    "tsc": "tsc",
-    "prettify": "prettier --write src/*.ts src/*.tsx src/**/*.ts src/**/*.tsx example/src/**/*.ts example/src/**/*.tsx",
     "lint-staged": "lint-staged",
     "lint-staged:ts": "tsc && node node_modules/tslint/bin/tslint",
     "lint-staged:es": "eslint ./.eslintrc.js ./webpack.config.js",

@@ -17,7 +17,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: 'source-map', // cheap-module-eval-source-map
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify('development')
+      'process.env': JSON.stringify(process.env.NODE_ENV === 'development' ? 'development' : 'production')
     }),
     new ExtractTextPlugin({
       filename: utils.assetsPath(`[name].${process.env.NODE_ENV === 'production' ? 'min.' : ''}css`),
@@ -39,7 +39,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   watch: process.env.NODE_ENV === 'development'
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'development') {
   const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
   devWebpackConfig.externals = {
@@ -56,8 +56,8 @@ if (process.env.NODE_ENV === 'production') {
       amd: 'react-dom',
     },
   };
-  devWebpackConfig.plugins.push(
-    new UglifyJsPlugin({
+  if (process.env.NODE_ENV !== 'common') {
+    devWebpackConfig.plugins.push(new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
           warnings: false
@@ -65,7 +65,9 @@ if (process.env.NODE_ENV === 'production') {
       },
       sourceMap: true,
       parallel: true
-    }),
+    }))
+  }
+  devWebpackConfig.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
