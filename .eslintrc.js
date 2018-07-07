@@ -23,11 +23,12 @@ const eslintrc = {
     'react/forbid-prop-types': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.md'] }],
     'import/extensions': 0,
-    'import/no-unresolved': 0,
     'import/no-extraneous-dependencies': 0,
     'prefer-destructuring': 0,
+    'prefer-template': 0,
     'no-param-reassign': 0,
     'no-return-assign': 0,
+    'no-else-return': 0,
     'max-len': 0,
     'consistent-return': 0,
     'no-redeclare': 0,
@@ -37,10 +38,24 @@ const eslintrc = {
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/anchor-is-valid': 0,
     'react/no-danger': 0,
-    'comma-dangle': ['error', 'always-multiline'],
+    'comma-dangle': 0,
     'function-paren-newline': 0,
+    'space-before-function-paren': 0,
     'object-curly-newline': 0,
     'no-restricted-globals': 0,
+    'import/no-unresolved': 0,
+    'guard-for-in': 0,
+    'no-restricted-syntax': 0,
+    'no-console': 0,
+    'quote-props': 0,
+    // allow global require
+    'global-require': 0,
+    // allow paren-less arrow functions
+    'arrow-parens': 0,
+    // allow async-await
+    'generator-star-spacing': 0,
+    // allow debugger during development
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
   },
 };
 
