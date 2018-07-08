@@ -1,7 +1,10 @@
-@import "./theme.scss";
-html, body {
-  background-color: $body-background;
-  color: $text-color;
+html, body , #app {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  color: #000;
+  margin: 0;
+  padding: 0;
 }
 
 * {
@@ -9,12 +12,15 @@ html, body {
   margin: 0;
   padding: 0
 }
+
 ul, li {
   list-style: none;
 }
+
 .clearfix {
   *zoom: 1;
 }
+
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -23,26 +29,17 @@ ul, li {
   clear: both;
   height: 0;
 }
+
 :focus {
   outline: none;
 }
+
 a {
   text-decoration: none;
   outline: none;
 }
+
 .map-content {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: $font-family;
-  font-size: $font-size-sm;
-  line-height: 1.5;
-  color: $text-color-secondary;
+  height: 100%;
 }
