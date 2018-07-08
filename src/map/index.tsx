@@ -1,74 +1,107 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import * as classNames from 'classnames';
+import * as maptalks from 'maptalks';
 
-export type ButtonType = 'default' | 'primary' | 'ghost' | 'dashed' | 'danger';
-
-export interface BaseButtonProps {
-  type?: ButtonType;
-  text?: string;
-  className?: string;
+export interface State {
+  map?: maptalks.Map;
+  ready: boolean;
 }
 
-export type AnchorButtonProps = {
-  href: string;
-  target?: string;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
-} & BaseButtonProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement>;
+// React Props updated between re-render
+export interface Props {
+  center?: number[];
+  zoom?: number;
+  maxZoom?: number;
+  minZoom?: number;
+  maxExtent?: Array<number>;
+  zoomable?: boolean;
+  className?: string;
+  checkSize?: boolean;
+  renderer?: string;
+  maxVisualPitch?: number;
+  maxPitch?: number;
+  centerCross?: boolean;
+  zoomInCenter?: boolean;
+  fpsOnInteracting?: number;
+  enableInfoWindow?: boolean;
+  zoomAnimationDuration?: number;
+  panAnimationDuration?: number;
+  layerCanvasLimitOnInteracting?: number;
+  baseLayer?: maptalks.TileLayer
+}
 
-export type NativeButtonProps = {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-} & BaseButtonProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement>;
-
-export type ButtonProps = AnchorButtonProps | NativeButtonProps;
-
-export default class Button extends React.Component<ButtonProps, any> {
-  static defaultProps = {
-    type: '',
-    text: ''
+class Map extends React.Component<Props, State> {
+  public static defaultProps = {
+    center: [0, 0],
+    zoom: 0,
+    baseLayer: new maptalks.TileLayer('base', {
+      urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      subdomains: ['a','b','c','d'],
+      attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
+    })
   };
 
-  static propTypes = {
-    text: PropTypes.string,
-    type: PropTypes.string,
-    onClick: PropTypes.func,
-    className: PropTypes.string
+  public static propTypes = {
+    center: PropTypes.array,
+    zoom: PropTypes.number
   };
 
-  constructor(props: ButtonProps) {
-    super(props);
-    this.state = {
-      clicked: false,
-      hasTwoCNChar: false
-    };
+  public static childContextTypes = {
+    map: PropTypes.object
+  };
+
+  public state = {
+    map: undefined,
+    ready: false
+  };
+
+  public getChildContext = () => ({
+    map: this.state.map
+  });
+
+  public container: HTMLElement;
+
+  public componentWillReceiveProps(nextProps: Props) {
+    const { map } = this.state as State;
+    if (!map) {
+      return null;
+    }
+
+    if (nextProps.center) {
+      map.setCenter(nextProps.center);
+    }
+
+    return null;
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
-
-  handleClick: React.MouseEventHandler<
-    HTMLButtonElement | HTMLAnchorElement
-  > = e => {
-    const onClick = this.props.onClick;
-    if (onClick) {
-      (onClick as React.MouseEventHandler<
-        HTMLButtonElement | HTMLAnchorElement
-      >)(e);
-    }
+  public setRef = (x: HTMLElement | null) => {
+    this.container = x!;
   };
 
-  render() {
-    const { type, className, text } = this.props;
-    const classes = classNames('', className);
+  public componentDidMount() {
+    const {
+      center,
+      zoom
+    } = this.props;
+    const options = {
+      zoom: zoom,
+      center: center
+    };
+    const map = new maptalks.Map(this.container, options);
+    this.setState({ map });
+  }
+
+  public render() {
+    const { className } = this.props;
+
     return (
-      <button type={type} className={classes} onClick={this.handleClick}>
-        {text}
-      </button>
+      <div
+        ref={this.setRef}
+        className={className}
+      >
+      </div>
     );
   }
 }
+
+export default Map;

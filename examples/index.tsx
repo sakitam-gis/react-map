@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import { hot } from 'react-hot-loader';
 import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -21,7 +20,7 @@ const RootApp = () => {
 // Render the main component into the dom
 if (env === 'development') {
   window.onload = function () {
-    const render = Component => {
+    const render = (Component:any) => {
       ReactDOM.render(
         <AppContainer>
           <Component/>
@@ -32,8 +31,9 @@ if (env === 'development') {
     render(RootApp);
 
     // HMR
-    if (module.hot) {
-      module.hot.accept('./routes', () => {
+    // tslint:disable-line
+    if (module['hot']) {
+      module['hot'].accept('./routes', () => {
         render(RootApp);
       });
     }
