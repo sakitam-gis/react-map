@@ -84,7 +84,7 @@ class Index extends React.Component {
 
   render () {
     return (
-      <div>112</div>
+      <div>11248</div>
     );
   }
 }

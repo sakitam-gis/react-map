@@ -12,6 +12,7 @@
     "react"
   ],
   "plugins": [
+    "react-hot-loader/babel",
     "transform-react-remove-prop-types",
     "transform-class-properties",
     "transform-object-assign",

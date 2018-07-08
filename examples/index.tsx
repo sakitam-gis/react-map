@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { hot } from 'react-hot-loader';
 import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';

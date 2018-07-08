@@ -125,7 +125,7 @@
     "dist": "cross-env NODE_ENV=production node build/build.js",
     "dist:common": "cross-env NODE_ENV=common node build/build.js",
     "dist:esm": "cross-env NODE_ENV=esm node build/build.js",
-    "dev:examples": "cross-env NODE_ENV=development webpack-dev-server --inline --config build/webpack.examples.conf.js",
+    "dev:examples": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --config build/webpack.examples.conf.js",
     "tsc": "tsc",
     "tsc:watch": "tsc --watch",
     "prettify": "prettier --write src/*.ts src/*.tsx src/**/*.ts src/**/*.tsx examples/src/**/*.ts examples/src/**/*.tsx",

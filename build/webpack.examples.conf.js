@@ -13,9 +13,6 @@ const PORT = (process.env.PORT && Number(process.env.PORT)) || 4000;
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './examples/index'
-  },
   output: {
     path: path.resolve(__dirname, '../demo'),
     filename: '[name].js',
@@ -77,6 +74,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 });
+
+devWebpackConfig.entry = {
+  app: './examples/index'
+};
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = PORT;
