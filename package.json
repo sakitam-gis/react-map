@@ -21,15 +21,14 @@
     "url": "https://github.com/sakitam-gis/react-map/issues"
   },
   "main": "dist/react-map.common.js",
-  "module": "dist/react-map.esm.js",
+  "module": "lib/index.js",
   "unpkg": "dist/react-map.js",
   "style": "dist/react-map.css",
+  "typings": "lib/index.d.ts",
   "files": [
     "dist",
-    "lib",
-    "es"
+    "lib"
   ],
-  "typings": "lib/index.d.ts",
   "license": "BSD3",
   "peerDependencies": {
     "react": ">=16.0.0",
@@ -118,27 +117,16 @@
     "dist:common": "cross-env NODE_ENV=common node build/build.js",
     "dist:esm": "cross-env NODE_ENV=esm node build/build.js",
     "tsc": "tsc",
+    "tsc:watch": "tsc --watch",
     "prettify": "prettier --write src/*.ts src/*.tsx src/**/*.ts src/**/*.tsx example/src/**/*.ts example/src/**/*.tsx",
-    "lint": "npm run lint:ts && npm run lint:es && npm run lint:demo && npm run lint:style",
-    "lint:ts": "npm run tsc && antd-tools run ts-lint",
-    "lint:es": "eslint tests site scripts components ./.eslintrc.js ./webpack.config.js --ext '.js,.jsx'",
-    "lint:demo": "cross-env RUN_ENV=DEMO eslint components/*/demo/*.md --ext '.md'",
-    "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
-    "lint-fix:ts": "npm run tsc && antd-tools run ts-lint-fix",
-    "lint-fix": "npm run lint-fix:code && npm run lint-fix:demo",
-    "lint-fix:code": "eslint --fix tests site scripts components ./.eslintrc.js ./webpack.config.js --ext '.js,.jsx'",
-    "lint-fix:demo": "eslint-tinker ./components/*/demo/*.md",
+    "lint": "npm run lint:ts && npm run lint:style",
+    "lint:ts": "tslint --project tsconfig.json",
     "lint-staged": "lint-staged",
-    "lint-staged:ts": "tsc && node node_modules/tslint/bin/tslint",
-    "lint-staged:es": "eslint ./.eslintrc.js ./webpack.config.js",
-    "lint-staged:demo": "cross-env RUN_ENV=DEMO eslint --ext '.md'"
+    "lint-staged:ts": "tsc && node node_modules/tslint/bin/tslint"
   },
   "lint-staged": {
     "components/**/*.tsx": [
       "npm run lint-staged:ts"
-    ],
-    "{tests,site,scripts,components}/**/*.{js,jsx}": [
-      "npm run lint-staged:es"
     ],
     "{site,components}/**/*.less": "stylelint --syntax less",
     "components/*/demo/*.md": [
@@ -149,7 +137,6 @@
     "lint-staged"
   ],
   "sideEffects": [
-    "es/**/style/*",
     "lib/**/style/*"
   ],
   "engines": {
