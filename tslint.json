@@ -141,5 +141,10 @@
     "jsx-no-string-ref": false,
     "jsx-boolean-value": [true, "never"],
     "jsx-wrap-multiline": false
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "examples/utils"
+  ]
 }

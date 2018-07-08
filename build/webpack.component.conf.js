@@ -72,7 +72,21 @@ if (process.env.NODE_ENV !== 'development') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      analyzerHost: '127.0.0.1',
+      analyzerPort: 8888,
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: true,
+      generateStatsFile: false,
+      statsFilename: 'stats.json',
+      statsOptions: null,
+      excludeAssets: null,
+      logLevel: 'info',
+      // deprecated
+      startAnalyzer: true
+    })
   );
 }
 
