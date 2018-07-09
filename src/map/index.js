@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as maptalks from 'maptalks/dist/maptalks';
+import * as maptalks from 'maptalks';
 
 class Map extends React.Component {
   static defaultProps = {
     center: [0, 0],
     zoom: 0,
-    baseLayer: new maptalks.TileLayer('base', {
-      urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-      subdomains: ['a', 'b', 'c', 'd'],
-      attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
-    }),
   };
 
   static propTypes = {
@@ -81,7 +76,12 @@ class Map extends React.Component {
       center
     };
     const map = new maptalks.Map(this.container, options);
-    console.log(map);
+    const layer = new maptalks.TileLayer('base', {
+      urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      subdomains: ['a', 'b', 'c', 'd'],
+      attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
+    });
+    map.addLayer(layer);
     this.setState({
       map
     });

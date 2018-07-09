@@ -34,14 +34,14 @@
   },
   "dependencies": {
     "array-tree-filter": "^2.1.0",
+    "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "create-react-class": "^15.6.3",
     "dom-closest": "^0.2.0",
     "lodash": "^4.17.10",
     "maptalks": "^0.40.4",
     "prop-types": "^15.6.2",
-    "react-lazy-load": "^3.0.13",
-    "axios": "^0.18.0"
+    "react-lazy-load": "^3.0.13"
   },
   "devDependencies": {
     "async-react-component": "^0.7.0",
