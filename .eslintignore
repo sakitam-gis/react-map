@@ -1,9 +1,3 @@
-src/**/*.js
-src/**/*.jsx
-src/*/__tests__/type.tsx
 !.eslintrc.js
-!src/*/__tests__/**/*.js
-!src/*/demo/*
 dist/
-es/
 lib/

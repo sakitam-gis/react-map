@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
-import routes from './routes/index';
 import createBrowserHistory from 'history/createBrowserHistory';
 import registerServiceWorker from './utils/registerServiceWorker';
+import routes from './routes/index';
 
 const env = process.env.NODE_ENV || 'development';
 const browserHistory = createBrowserHistory();
@@ -20,10 +20,10 @@ const RootApp = () => {
 // Render the main component into the dom
 if (env === 'development') {
   window.onload = function () {
-    const render = (Component:any) => {
+    const render = Component => {
       ReactDOM.render(
         <AppContainer>
-          <Component/>
+          <Component />
         </AppContainer>,
         document.getElementById('app')
       );
@@ -32,8 +32,8 @@ if (env === 'development') {
 
     // HMR
     // tslint:disable-line
-    if (module['hot']) {
-      module['hot'].accept('./routes', () => {
+    if (module.hot) {
+      module.hot.accept('./routes', () => {
         render(RootApp);
       });
     }

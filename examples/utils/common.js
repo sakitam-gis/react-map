@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-function getOptions(props: any): any {
-  let options: any = {};
-  for(let key in props) {
+function getOptions(props) {
+  const options = {};
+  for (const key in props) {
     if (
       key !== 'children'
-      && typeof props[key] !== 'undefined' //exclude undefined ones
-      && !key.match(/^on[A-Z]/)     //exclude events
+      && typeof props[key] !== 'undefined' // exclude undefined ones
+      && !key.match(/^on[A-Z]/)
     ) {
       options[key] = props[key];
     }
@@ -14,24 +14,23 @@ function getOptions(props: any): any {
   return options;
 }
 
-function getPropsKey(eventName: any) {
+function getPropsKey (eventName) {
   return 'on' + eventName
   // eslint-disable-next-line
     .replace(/(\:[a-z])/g, $1 => $1.toUpperCase())
     .replace(/^[a-z]/, $1 => $1.toUpperCase())
-    .replace(':','')
+    .replace(':', '');
 }
 
-function getEvents(events: any={}, props: any={}): any {
-  let prop2EventMap: any = {};
-  for(let key in events) {
+function getEvents(events, props) {
+  let prop2EventMap;
+  for (const key in events) {
     prop2EventMap[getPropsKey(key)] = key;
   }
-
-  let ret = {};
-  for(let propName in props) {
-    let eventName = prop2EventMap[propName];
-    let prop = props[propName];
+  const ret = {};
+  for (const propName in props) {
+    const eventName = prop2EventMap[propName];
+    const prop = props[propName];
     if (typeof prop !== 'undefined' && propName.match(/^on[A-Z]/) && eventName) {
       ret[eventName] = prop;
     }
@@ -40,21 +39,19 @@ function getEvents(events: any={}, props: any={}): any {
   return ret;
 }
 
-let typeOf = function(value: object){
+const typeOf = function(value) {
   return ({}).toString.call(value)
     .match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 };
 
-function cloneObject(value: {
-  clone: Function
-}){
+function cloneObject(value) {
   const type = typeOf(value);
-  if (type == 'object' || type == 'array') {
-    if (value['clone']) {
+  if (type === 'object' || type === 'array') {
+    if (value.clone) {
       return value.clone();
     }
-    const clone = type == 'array' ? [] : {};
-    for (let key in value) {
+    const clone = type === 'array' ? [] : {};
+    for (const key in value) {
       clone[key] = cloneObject(value[key]);
     }
     return clone;
@@ -62,12 +59,13 @@ function cloneObject(value: {
   return value;
 }
 
-function findChild(children: any, childType: string) {
+function findChild (children, childType) {
   let found;
-  let childrenArr = React.Children.toArray(children);
+  const childrenArr = React.Children.toArray(children);
+  // eslint-disable-next-line
   for (let i = 0; i < childrenArr.length; i++) {
-    let child: any = childrenArr[i];
-    if (child.type.name === childType){
+    const child = childrenArr[i];
+    if (child.type.name === childType) {
       found = child;
       break;
     }
@@ -75,7 +73,7 @@ function findChild(children: any, childType: string) {
   return found;
 }
 
-function getRelation (str1: string, str2: string) {
+function getRelation (str1, str2) {
   if (str1 === str2) {
     console.warn('Two path are equal!'); // eslint-disable-line
   }
@@ -89,7 +87,7 @@ function getRelation (str1: string, str2: string) {
   return 3;
 }
 
-function getRenderArr (routes: Array<string>) {
+function getRenderArr (routes) {
   let renderArr = [];
   renderArr.push(routes[0]);
   for (let i = 1; i < routes.length; i += 1) {
@@ -110,7 +108,7 @@ function getRenderArr (routes: Array<string>) {
  * @param {string} path
  * @param {routerData} routerData
  */
-function getRoutes (path: string, routerData: object) {
+function getRoutes (path, routerData) {
   let routes = Object.keys(routerData).filter(
     routePath => routePath.indexOf(path) === 0 && routePath !== path
   );
@@ -137,4 +135,4 @@ export {
   cloneObject,
   findChild,
   getRoutes
-}
+};

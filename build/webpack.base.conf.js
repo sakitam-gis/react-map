@@ -1,21 +1,6 @@
 const path = require('path');
 const utils = require('./utils');
 
-const createLintingRule = () => ({
-  test: /\.(js|jsx)$/,
-  loader: 'eslint-loader',
-  enforce: 'pre',
-  include: [
-    utils.resolve('src'),
-    utils.resolve('examples'),
-    utils.resolve('test')
-  ],
-  options: {
-    formatter: require('eslint-friendly-formatter'),
-    emitWarning: true,
-  },
-});
-
 const filename = process.env.NODE_ENV === 'production' ? 'min.' : (process.env.NODE_ENV === 'common' ? 'common.' : '');
 const _target = process.env.NODE_ENV === 'common' ? 'commonjs2' : 'umd2';
 
@@ -31,12 +16,7 @@ module.exports = {
   },
   resolve: {
     extensions: [
-      '.web.tsx',
-      '.web.ts',
-      '.web.jsx',
       '.web.js',
-      '.ts',
-      '.tsx',
       '.js',
       '.jsx',
       '.json',
@@ -47,7 +27,20 @@ module.exports = {
   },
   module: {
     rules: [
-      ...([createLintingRule()] || []),
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [
+          utils.resolve('src'),
+          utils.resolve('examples'),
+          utils.resolve('test')
+        ],
+        options: {
+          formatter: require('eslint-friendly-formatter'),
+          emitWarning: true,
+        },
+      },
       {
         test: /(\.jsx|\.js)$/,
         loader: 'babel-loader',
@@ -59,29 +52,6 @@ module.exports = {
         options: {
           cacheDirectory: true,
         },
-      },
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              plugins: ['react-hot-loader/babel'],
-            }
-          },
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-            },
-          },
-        ],
-        include: [
-          utils.resolve('src'),
-          utils.resolve('examples'),
-          utils.resolve('test'),
-        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -119,5 +89,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty',
-  },
+  }
 };

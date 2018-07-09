@@ -18,6 +18,8 @@ const eslintrc = {
     'arrow-body-style': 0,
     'react/sort-comp': 0,
     'react/prop-types': 0,
+    'react/no-unused-prop-types': 0,
+    'react/require-default-props': 0,
     'react/jsx-first-prop-new-line': 0,
     'react/jsx-one-expression-per-line': 0,
     'react/forbid-prop-types': 0,
@@ -44,9 +46,11 @@ const eslintrc = {
     'object-curly-newline': 0,
     'no-restricted-globals': 0,
     'import/no-unresolved': 0,
+    'import/prefer-default-export': 0,
     'guard-for-in': 0,
     'no-restricted-syntax': 0,
     'no-console': 0,
+    // 要求属性名使用引号
     'quote-props': 0,
     // allow global require
     'global-require': 0,
