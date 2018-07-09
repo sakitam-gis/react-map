@@ -1,5 +1,5 @@
-import * as React from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Index from '../views/index';
 
 const mainRouter = [
@@ -16,8 +16,8 @@ const mainRouter = [
 
 const routes = (
   <Switch>
-    {mainRouter.map((route, i) => <Route key={i} {...route.route} />)}
-    <Redirect to='/index' />
+    {mainRouter.map((route) => <Route key={route.key} {...route.route} />)}
+    <Redirect to="/index" />
   </Switch>
 );
 
