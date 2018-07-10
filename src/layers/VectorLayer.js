@@ -27,10 +27,16 @@ class VectorLayer extends OverlayLayer {
     drawAltitude: PropTypes.bool
   };
 
+  static childContextTypes = {
+    layer: PropTypes.instanceOf(maptalks.Layer)
+  };
+
   constructor(props, context) {
     super(props, context);
 
-    this.layer = null;
+    this.state = {
+      layer: null
+    };
   }
 
   /**
@@ -40,14 +46,39 @@ class VectorLayer extends OverlayLayer {
   createLayer (nextProps) {
     if (nextProps) {
       const { map } = this.context;
+      const { layer } = this.state;
       if (!map) return;
-      if (this.layer) {
-        map.removeLayer(this.layer);
+      if (layer) {
+        map.removeLayer(layer);
       }
       const { id, geometries } = nextProps;
-      this.layer = new maptalks.VectorLayer(id, geometries, nextProps);
-      map.addLayer(this.layer);
+      const layerInter = new maptalks.VectorLayer(id, geometries, nextProps);
+      map.addLayer(layerInter);
+      this.setState({
+        layer: layerInter
+      });
     }
+  }
+
+  /**
+   * layer
+   * @returns {null|maptalks.VectorLayer}
+   */
+  getChildContext() {
+    const { layer } = this.state;
+    console.log(layer, '1');
+    return layer;
+  }
+
+  /**
+   * render
+   * @returns {{children}}
+   */
+  render () {
+    const { children } = this.props;
+    return (
+      children
+    );
   }
 }
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import '../../dist/react-map.css';
 import './index.scss';
-import { Map, TileLayer, VectorLayer } from '../..';
+import { Map, VectorLayer, Circle } from '../..';
 
 class Index extends React.Component {
   static propTypes = {
@@ -22,15 +22,15 @@ class Index extends React.Component {
 
   // 组件已经加载到dom中
   componentDidMount () {
-    const timer = setInterval(() => {
-      const { zoom } = this.state;
-      if (zoom <= 0) {
-        window.clearInterval(timer);
-      }
-      this.setState({
-        zoom: zoom - 1
-      });
-    }, 1000);
+    // const timer = setInterval(() => {
+    //   const { zoom } = this.state;
+    //   if (zoom <= 0) {
+    //     window.clearInterval(timer);
+    //   }
+    //   this.setState({
+    //     zoom: zoom - 1
+    //   });
+    // }, 1000);
   }
 
   handleMapLoad = (map, event) => {
@@ -39,7 +39,6 @@ class Index extends React.Component {
 
   render () {
     const { zoom } = this.state;
-    console.log(zoom);
     return (
       <Map
         className="map-content"
@@ -49,15 +48,22 @@ class Index extends React.Component {
           onload: this.handleMapLoad
         }}
       >
-        <TileLayer
-          id="layer"
-          renderer="gl"
-          urlTemplate="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
-          subdomains={['a', 'b', 'c', 'd']}
-        />
         <VectorLayer
           id="vector"
-        />
+        >
+          <Circle
+            center={[-0.113049, 51.498568]}
+            radius={500}
+            options={{
+              symbol: {
+                lineColor: '#34495e',
+                lineWidth: 2,
+                polygonFill: '#1bbc9b',
+                polygonOpacity: 0.4
+              }
+            }}
+          />
+        </VectorLayer>
       </Map>
     );
   }
