@@ -51,6 +51,7 @@ class TileLayer extends React.Component {
   }
 
   render() {
+    this.createLayer(this.props);
     return null;
   }
 
@@ -81,6 +82,7 @@ class TileLayer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.createLayer(nextProps);
+    return null;
   }
 
   componentWillUnmount() {

@@ -27,11 +27,7 @@ class VectorLayer extends OverlayLayer {
     drawAltitude: PropTypes.bool
   };
 
-  static childContextTypes = {
-    layer: PropTypes.instanceOf(maptalks.Layer)
-  };
-
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this.state = {
@@ -60,25 +56,19 @@ class VectorLayer extends OverlayLayer {
     }
   }
 
-  /**
-   * layer
-   * @returns {null|maptalks.VectorLayer}
-   */
-  getChildContext() {
-    const { layer } = this.state;
-    console.log(layer, '1');
-    return layer;
+  componentWillReceiveProps(nextProps) {
+    this.createLayer(nextProps);
+    return null;
   }
 
   /**
    * render
-   * @returns {{children}}
+   * @returns {null}
    */
   render () {
-    const { children } = this.props;
-    return (
-      children
-    );
+    // const { children } = this.props;
+    console.log(this);
+    return null;
   }
 }
 

@@ -47,8 +47,24 @@ class Geometry extends React.Component {
     if (nextProps) {
       const { layer } = this.context;
       if (!layer) return;
-      layer.addGeometry(new maptalks.Geometry());
+      this.geometry = new maptalks.Geometry();
+      layer.addGeometry(this.geometry);
     }
+  }
+
+  componentDidMount() {
+    this.createGeometry(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createGeometry(nextProps);
+    return null;
+  }
+
+  componentWillUnmount() {
+    const { layer } = this.context;
+    if (!layer) return;
+    layer.removeGeometry(this.geometry);
   }
 
   /**
@@ -56,6 +72,7 @@ class Geometry extends React.Component {
    * @returns {null}
    */
   render () {
+    this.createGeometry(this.props);
     return null;
   }
 }

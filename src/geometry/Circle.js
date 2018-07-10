@@ -9,6 +9,10 @@ class Circle extends Geometry {
     options: PropTypes.any
   };
 
+  static contextTypes = {
+    layer: PropTypes.instanceOf(maptalks.Layer)
+  };
+
   /**
    * super class
    * @param props
@@ -36,6 +40,7 @@ class Circle extends Geometry {
       this.geometry = new maptalks.Circle(center, radius, options);
       this.geometry.setProperties(options);
       layer.addGeometry(this.geometry);
+      console.log(layer);
     }
   }
 

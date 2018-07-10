@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import '../../dist/react-map.css';
 import './index.scss';
-import { Map, VectorLayer, Circle } from '../..';
+import { Map, TileLayer, VectorLayer, Circle } from '../..';
 
 class Index extends React.Component {
   static propTypes = {
@@ -48,10 +48,17 @@ class Index extends React.Component {
           onload: this.handleMapLoad
         }}
       >
+        <TileLayer
+          id="layer"
+          renderer="gl"
+          urlTemplate="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+          subdomains={['a', 'b', 'c', 'd']}
+        />
         <VectorLayer
           id="vector"
         >
           <Circle
+            id="circle"
             center={[-0.113049, 51.498568]}
             radius={500}
             options={{

@@ -31,15 +31,15 @@ class Map extends React.Component {
   };
 
   static childContextTypes = {
-    map: PropTypes.instanceOf(maptalks.Map),
-    options: PropTypes.object
+    map: PropTypes.instanceOf(maptalks.Map)
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      map: undefined
+      map: undefined,
+      isLoad: false
     };
 
     this.container = null;
@@ -126,6 +126,9 @@ class Map extends React.Component {
     });
 
     if (map.isLoaded()) {
+      this.setState({
+        isLoad: true
+      });
       for (const key in events) {
         if (key === 'onload') {
           events[key](map, this);
@@ -137,14 +140,15 @@ class Map extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('des');
+    // console.log('des');
   }
 
   render() {
+    const { isLoad } = this.state;
     const { className, children } = this.props;
     return (
       <div ref={this.setRef} className={className}>
-        {children}
+        {isLoad ? children : null}
       </div>
     );
   }
