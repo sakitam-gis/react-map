@@ -2,9 +2,9 @@ import Geometry from './Geometry';
 import Marker from './Marker';
 import LineString from './LineString';
 import Polygon from './Polygon';
-// import MultiPoint from './MultiPoint';
-// import MultiLineString from './MultiLineString';
-// import MultiPolygon from './MultiPolygon';
+import MultiPoint from './MultiPoint';
+import MultiLineString from './MultiLineString';
+import MultiPolygon from './MultiPolygon';
 // import GeometryCollection from './GeometryCollection';
 // import GeoJSON from './GeoJSON';
 import Circle from './Circle';
@@ -33,9 +33,9 @@ export {
   // Label,
   LineString,
   Marker,
-  // MultiLineString,
-  // MultiPoint,
-  // MultiPolygon,
+  MultiLineString,
+  MultiPoint,
+  MultiPolygon,
   Polygon,
   // QuadBezierCurve,
   // Rectangle,

@@ -9,3 +9,6 @@ export class Circle extends React.Component<any> {}
 export class Marker extends React.Component<any> {}
 export class LineString extends React.Component<any> {}
 export class Polygon extends React.Component<any> {}
+export class MultiPoint extends React.Component<any> {}
+export class MultiLineString extends React.Component<any> {}
+export class MultiPolygon extends React.Component<any> {}
