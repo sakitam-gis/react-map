@@ -5,7 +5,6 @@ function camelCase(name) {
   });
 }
 
-// Just import style for https://github.com/ant-design/ant-design/issues/3745
 const req = require.context('./src', true, /^\.\/[^_][\w-]+\/style\/index\.tsx?$/);
 
 req.keys().forEach((mod) => {
@@ -15,12 +14,7 @@ req.keys().forEach((mod) => {
   }
   const match = mod.match(/^\.\/([^_][\w-]+)\/index\.tsx?$/);
   if (match && match[1]) {
-    if (match[1] === 'message' || match[1] === 'notification') {
-      // message & notification should not be capitalized
-      exports[match[1]] = v;
-    } else {
-      exports[camelCase(match[1])] = v;
-    }
+    exports[camelCase(match[1])] = v;
   }
 });
 

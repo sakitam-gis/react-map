@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import createBrowserHistory from 'history/createBrowserHistory';
-import registerServiceWorker from './utils/registerServiceWorker';
 import routes from './routes/index';
 
 const env = process.env.NODE_ENV || 'development';
