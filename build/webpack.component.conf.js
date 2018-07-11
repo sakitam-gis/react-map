@@ -65,7 +65,7 @@ if (process.env.NODE_ENV !== 'development') {
       },
       sourceMap: true,
       parallel: true
-    }))
+    }));
   }
   devWebpackConfig.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),

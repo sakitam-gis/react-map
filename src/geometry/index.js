@@ -1,7 +1,7 @@
 import Geometry from './Geometry';
-// import Marker from './Marker';
-// import LineString from './LineString';
-// import Polygon from './Polygon';
+import Marker from './Marker';
+import LineString from './LineString';
+import Polygon from './Polygon';
 // import MultiPoint from './MultiPoint';
 // import MultiLineString from './MultiLineString';
 // import MultiPolygon from './MultiPolygon';
@@ -31,12 +31,12 @@ export {
   Geometry,
   // GeometryCollection,
   // Label,
-  // LineString,
-  // Marker,
+  LineString,
+  Marker,
   // MultiLineString,
   // MultiPoint,
   // MultiPolygon,
-  // Polygon,
+  Polygon,
   // QuadBezierCurve,
   // Rectangle,
   // Sector,

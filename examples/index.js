@@ -28,8 +28,6 @@ if (env === 'development') {
       );
     };
     render(RootApp);
-
-    // HMR
     // tslint:disable-line
     if (module.hot) {
       module.hot.accept('./routes', () => {
@@ -45,5 +43,3 @@ if (env === 'development') {
     );
   };
 }
-
-registerServiceWorker();

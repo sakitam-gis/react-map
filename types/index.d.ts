@@ -6,3 +6,6 @@ export class OverlayLayer extends React.Component<any> {}
 export class VectorLayer extends React.Component<any> {}
 export class Geometry extends React.Component<any> {}
 export class Circle extends React.Component<any> {}
+export class Marker extends React.Component<any> {}
+export class LineString extends React.Component<any> {}
+export class Polygon extends React.Component<any> {}

@@ -1,12 +1,12 @@
 const path = require('path');
-const utils = require('./utils');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.conf');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
+const utils = require('./utils');
+const baseWebpackConfig = require('./webpack.base.conf');
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = (process.env.PORT && Number(process.env.PORT)) || 4000;
@@ -83,7 +83,7 @@ module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = PORT;
   portfinder.getPort((err, port) => {
     if (err) {
-      reject(err)
+      reject(err);
     } else {
       // add port to devServer config
       devWebpackConfig.devServer.port = port;
@@ -96,5 +96,5 @@ module.exports = new Promise((resolve, reject) => {
       }));
       resolve(devWebpackConfig);
     }
-  })
+  });
 });
