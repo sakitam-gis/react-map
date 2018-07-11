@@ -45,13 +45,10 @@ class TileLayer extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      layer: null
-    };
+    this.layer = null;
   }
 
   render() {
-    this.createLayer(this.props);
     return null;
   }
 
@@ -62,17 +59,13 @@ class TileLayer extends React.Component {
   createLayer (nextProps) {
     if (nextProps) {
       const { map } = this.context;
-      const { layer } = this.state;
       if (!map) return;
-      if (layer) {
-        map.removeLayer(layer);
+      if (this.layer) {
+        map.removeLayer(this.layer);
       }
       const { id } = nextProps;
-      const layerInter = new maptalks.Layer(id, nextProps);
-      map.addLayer(layerInter);
-      this.setState({
-        layer: layerInter
-      });
+      this.layer = new maptalks.Layer(id, nextProps);
+      map.addLayer(this.layer);
     }
   }
 
@@ -87,9 +80,8 @@ class TileLayer extends React.Component {
 
   componentWillUnmount() {
     const { map } = this.context;
-    const { layer } = this.state;
-    if (!map || !layer) return;
-    map.removeLayer(layer);
+    if (!map || !this.layer) return;
+    map.removeLayer(this.layer);
   }
 }
 

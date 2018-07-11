@@ -72,7 +72,6 @@ class Geometry extends React.Component {
    * @returns {null}
    */
   render () {
-    this.createGeometry(this.props);
     return null;
   }
 }

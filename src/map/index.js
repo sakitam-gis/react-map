@@ -38,9 +38,14 @@ class Map extends React.Component {
     super(props);
 
     this.state = {
-      map: undefined,
       isLoad: false
     };
+
+    /**
+     * map
+     * @type {null}
+     */
+    this.map = null;
 
     this.container = null;
 
@@ -48,9 +53,8 @@ class Map extends React.Component {
   }
 
   getChildContext() {
-    const { map } = this.state;
     return {
-      map
+      map: this.map
     };
   }
 
@@ -60,18 +64,17 @@ class Map extends React.Component {
   // componentDidUpdate(prevProps, prevState)
 
   componentWillReceiveProps(nextProps) {
-    const { map } = this.state;
     const { center, zoom } = this.props;
-    if (!map) {
+    if (!this.map) {
       return null;
     }
 
     if (!isequal(nextProps.center, center)) {
-      map.setCenter(nextProps.center);
+      this.map.setCenter(nextProps.center);
     }
 
     if (!isequal(nextProps.zoom, zoom)) {
-      map.setZoom(nextProps.zoom);
+      this.map.setZoom(nextProps.zoom);
     }
     // set layers
     this.setBaseLayer(nextProps.baseLayer);
@@ -86,12 +89,11 @@ class Map extends React.Component {
    * @returns {null}
    */
   setBaseLayer (layers) {
-    const { map } = this.state;
-    if (!map) {
+    if (!this.map) {
       return null;
     }
     if (layers && layers.length > 0) {
-      map.setBaseLayer();
+      this.map.setBaseLayer();
     }
   }
 
@@ -101,8 +103,7 @@ class Map extends React.Component {
    * @returns {null}
    */
   setLayers (layers) {
-    const { map } = this.state;
-    if (!map) {
+    if (!this.map) {
       return null;
     }
     if (layers && layers.length > 0) {
@@ -120,20 +121,16 @@ class Map extends React.Component {
       zoom,
       center
     };
-    const map = new maptalks.Map(this.container, options);
-    this.setState({
-      map
-    });
-
-    if (map.isLoaded()) {
+    this.map = new maptalks.Map(this.container, options);
+    if (this.map.isLoaded()) {
       this.setState({
         isLoad: true
       });
       for (const key in events) {
         if (key === 'onload') {
-          events[key](map, this);
+          events[key](this.map, this);
         } else {
-          map.on(key, events[key], this);
+          this.map.on(key, events[key], this);
         }
       }
     }

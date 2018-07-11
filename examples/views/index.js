@@ -16,7 +16,8 @@ class Index extends React.Component {
   constructor (props, context) {
     super(props, context);
     this.state = {
-      zoom: 14
+      zoom: 14,
+      radius: 500
     };
   }
 
@@ -31,6 +32,15 @@ class Index extends React.Component {
     //     zoom: zoom - 1
     //   });
     // }, 1000);
+    const timer = setInterval(() => {
+      const { radius } = this.state;
+      if (radius >= 1000) {
+        window.clearInterval(timer);
+      }
+      this.setState({
+        radius: radius + 100
+      });
+    }, 1000);
   }
 
   handleMapLoad = (map, event) => {
@@ -38,7 +48,7 @@ class Index extends React.Component {
   };
 
   render () {
-    const { zoom } = this.state;
+    const { zoom, radius } = this.state;
     return (
       <Map
         className="map-content"
@@ -60,7 +70,7 @@ class Index extends React.Component {
           <Circle
             id="circle"
             center={[-0.113049, 51.498568]}
-            radius={500}
+            radius={radius}
             options={{
               symbol: {
                 lineColor: '#34495e',

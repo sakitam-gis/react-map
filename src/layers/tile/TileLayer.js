@@ -53,6 +53,14 @@ class TileLayer extends Layer {
   constructor(props, context) {
     super(props, context);
 
+    /**
+     * layer state
+     * @type {{isAdd: boolean}}
+     */
+    this.state = {
+      isAdd: false
+    };
+
     this.layer = null;
   }
 
@@ -69,6 +77,11 @@ class TileLayer extends Layer {
       }
       const { id } = nextProps;
       this.layer = new maptalks.TileLayer(id, nextProps);
+      this.layer.on('add', () => {
+        this.setState({
+          isAdd: true
+        });
+      });
       map.addLayer(this.layer);
     }
   }

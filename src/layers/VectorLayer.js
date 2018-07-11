@@ -27,11 +27,20 @@ class VectorLayer extends OverlayLayer {
     drawAltitude: PropTypes.bool
   };
 
+  static childContextTypes = {
+    layer: PropTypes.instanceOf(maptalks.Layer)
+  };
+
   constructor (props, context) {
     super(props, context);
+    this.layer = null;
 
+    /**
+     * layer state
+     * @type {{isAdd: boolean}}
+     */
     this.state = {
-      layer: null
+      isAdd: false
     };
   }
 
@@ -42,33 +51,40 @@ class VectorLayer extends OverlayLayer {
   createLayer (nextProps) {
     if (nextProps) {
       const { map } = this.context;
-      const { layer } = this.state;
       if (!map) return;
-      if (layer) {
-        map.removeLayer(layer);
+      if (this.layer) {
+        map.removeLayer(this.layer);
       }
       const { id, geometries } = nextProps;
-      const layerInter = new maptalks.VectorLayer(id, geometries, nextProps);
-      map.addLayer(layerInter);
-      this.setState({
-        layer: layerInter
+      this.layer = new maptalks.VectorLayer(id, geometries, nextProps);
+      this.layer.on('add', () => {
+        this.setState({
+          isAdd: true
+        });
       });
+      map.addLayer(this.layer);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.createLayer(nextProps);
-    return null;
+  }
+
+  getChildContext() {
+    return {
+      layer: this.layer
+    };
   }
 
   /**
    * render
-   * @returns {null}
+   * @returns {*}
    */
   render () {
-    // const { children } = this.props;
-    console.log(this);
-    return null;
+    const { isAdd } = this.state;
+    console.log(isAdd);
+    const { children } = this.props;
+    return (isAdd ? children : null);
   }
 }
 
