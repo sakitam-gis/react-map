@@ -50,6 +50,7 @@ const eslintrc = {
     'guard-for-in': 0,
     'no-restricted-syntax': 0,
     'no-console': 0,
+    'linebreak-style': 0,
     // 要求属性名使用引号
     'quote-props': 0,
     // allow global require
