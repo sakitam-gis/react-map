@@ -17,7 +17,7 @@ function alertBabelConfig(rules) {
 }
 
 module.exports = {
-  root: '/',
+  root: '/react-map/',
   port: 7007,
   source: {
     docs: './docs',
