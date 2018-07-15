@@ -62,7 +62,7 @@ class Home extends React.Component {
     const childProps = { ...this.props, isMobile };
     return (
       <DocumentTitle
-        title={`Ant Design - 22`}
+        title=""
       >
         <div className="main-wrapper">
           <style dangerouslySetInnerHTML={{ __html: getStyle() }} />

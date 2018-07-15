@@ -42,8 +42,8 @@ module.exports = {
         };
       }
     },
-    'guide': pickerGenerator('guide'),
-    'api': pickerGenerator('api'),
+    'docs/guide': pickerGenerator('guide'),
+    'docs/api': pickerGenerator('api'),
   },
   plugins: [
     'bisheng-plugin-description',
@@ -65,11 +65,11 @@ module.exports = {
         component: contentTmpl
       },
       {
-        path: 'guide/:contentName',
+        path: 'docs/guide/:children',
         component: contentTmpl
       },
       {
-        path: 'api/:contentName',
+        path: 'docs/api/:children',
         component: contentTmpl
       },
       {

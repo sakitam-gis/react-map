@@ -115,10 +115,7 @@ export default class Header extends React.Component {
       .split('/')
       .slice(0, -1)
       .join('/');
-    let activeMenuItem = module || 'home';
-    if (activeMenuItem === 'components' || location.pathname === 'changelog') {
-      activeMenuItem = 'docs/react';
-    }
+    const activeMenuItem = module || 'home';
     return [
       <Select
         key="version"
@@ -189,14 +186,7 @@ export default class Header extends React.Component {
         <Row>
           <Col xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <Link to={utils.getLocalizedPathname('/', true)} id="logo">
-              <img
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-              />
-              <img
-                alt="Ant Design"
-                src="https://gw.alipayobjects.com/zos/rmsportal/DkKNubTaaVsKURhcVGkh.svg"
-              />
+              <h4 style={{ display: 'inline-block', fontSize: '18px' }}>React-Map</h4>
             </Link>
           </Col>
           <Col xxl={20} xl={19} lg={19} md={18} sm={0} xs={0}>

@@ -1,151 +1,85 @@
 ---
 order: 0
-chinese: logo 聚集与散开
-english: logoGather
-image: https://zos.alipayobjects.com/rmsportal/YsRZqQwpiAVgWrX.png
+title: 安装
 ---
 
-以圆点散开与聚集来展示 logo 的一个小动画
+react-map 是一个基于 maptalks 封装的地图组件；帮助你轻松的接入地图到 React 项目中。
 
 ---
 
-首页 logo 动画的实现代码, 提供三个logo的样式， 还可自已添加 logo，如果需定制个性化的东西，请在 LogoGather 里修改。
+## 特性
 
-图片默认尺寸为 300 * 300;
+- 一个基于maptalks的React组件
+- 易用，易扩展，开箱即用。
 
-图片取点像素为控制点的个数，以图片宽度除以像素点来决定点的个数, 默认为 20, 每行每排为15个取点。
+## 支持环境
 
+* 现代浏览器和 IE9 及以上, 仅仅IE11 支持3D渲染。
+* 移动浏览器。
+* Electron。
 
-```jsx harmony
-import Input from 'antd/lib/input';
+## 安装
 
-class LogoGather extends React.Component {
-  render() {
-    return (
-      <div className="logo-gather-demo-wrapper">112</div>
-    );
-  }
-}
-class Edit extends React.Component {
-  render() {
-    return (<div>测试</div>);
-  }
-}
-ReactDOM.render(
-  <Edit />
-, mountNode);
+### 使用 npm 或 yarn 安装
+
+**我们推荐使用 npm 或 yarn 的方式进行开发**，
+不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，
+享受整个生态圈和工具链带来的诸多好处。
+
+```bash
+$ npm install @sakitam-gis/react-map --save
 ```
-```css
-.logo-gather-demo-edit-wrapper {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #f1f1f1;
-  padding: 0 5%;
-  line-height: 45px;
-}
 
-.logo-gather-demo-edit-wrapper ul {
-  display: block;
-  width: 100%;
-  overflow: hidden;
-}
-
-.logo-gather-demo-edit-wrapper ul li:first-child {
-  margin-left: 0;
-}
-
-.logo-gather-demo-edit-wrapper ul li {
-  float: left;
-  vertical-align: middle;
-  margin: 0 5px;
-}
-
-.logo-gather-demo-wrapper {
-  position: relative;
-  background: #019BF0;
-  overflow: hidden;
-  height: 500px;
-}
-
-.logo-gather-demo-wrapper .point-wrapper {
-  position: absolute;
-}
-
-.logo-gather-demo-wrapper .point {
-  border-radius: 100%;
-}
-
-.logo-gather-demo-wrapper .right-side {
-  width: 300px;
-  height: 360px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-}
-
-.logo-gather-demo-wrapper .right-side * {
-  pointer-events: none;
-}
-
-@media screen and (max-width: 414px) {
-  .exhibition-details-demo {
-    overflow: hidden;
-  }
-
-  .logo-gather-demo-edit-wrapper {
-    transform: translateY(100%);
-    transition: transform .45s ease-in-out;
-  }
-
-  .logo-gather-demo-edit-wrapper.open{
-    transform: translateY(0);
-  }
-
-  .logo-gather-demo-edit-wrapper .anticon-down{
-    transition: transform .45s ease-in-out;
-  }
-
-  .logo-gather-demo-edit-wrapper.open .anticon-down{
-    transform: rotate(180deg);
-  }
-
-  .logo-gather-demo-edit-wrapper > div {
-    width: 90%;
-    line-height: 24px !important;
-    margin-bottom: 5px;
-  }
-
-  .exhibition-details-demo .edit-button{
-    position: absolute;
-    top: -20px;
-    width: 30px;
-    height: 20px;
-    border-radius: 30px 30px 0 0;
-    background: #f1f1f1;
-    text-align: center;
-    left: 0;
-    right: 0;
-    margin: auto;
-    box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.15);
-  }
-
-  .logo-gather-demo-edit-wrapper ul {
-    margin: 5px auto;
-  }
-
-  .phone-float-none {
-    clear: both;
-    margin-left: 0 !important;
-  }
-
-  .none {
-    display: none;
-  }
-
-}
-
+```bash
+$ yarn add @sakitam-gis/react-map
 ```
+
+### 浏览器引入
+
+在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `ReactMap`。
+
+我们在 npm 发布包内的 `@sakitam-gis/react-map/dist` 目录下提供了 `react-map.js` `react-map.css`
+ 以及 `react-map.min.js` `react-map.min.css`。
+ 或 [UNPKG](https://unpkg.com/@sakitam-gis/react-map/dist/) 进行下载。
+
+## 示例
+
+```jsx
+import { Map, TileLayer } from '@sakitam-gis/react-map';
+ReactDOM.render(<Map
+  className="map-content"
+  center={[-0.113049, 51.498568]}
+  zoom={zoom}
+  events={{
+    onload: this.handleMapLoad
+  }}
+>
+  <TileLayer
+    id="layer"
+    renderer="gl"
+    urlTemplate="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+    subdomains={['a', 'b', 'c', 'd']}
+  />
+</Map>, mountNode)
+```
+
+引入样式：
+
+```jsx
+import '@sakitam-gis/dist/react-map.css';
+```
+
+## 链接
+
+- [首页](http://ant.design/)
+
+## 如何贡献
+
+在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md)。
+如果你希望参与贡献，欢迎 [Pull Request](https://github.com/ant-design/ant-design/pulls)，
+或给我们 [报告 Bug](http://new-issue.ant.design/)。
+
+> 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、
+  [《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 
+  [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、
+  [《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。

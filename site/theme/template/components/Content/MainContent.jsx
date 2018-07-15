@@ -27,23 +27,19 @@ function getModuleData (props) {
       .filter(item => item)
       .slice(0, 2)
       .join('/');
-  const moduleData = moduleName === 'components'
-  || moduleName === 'changelog'
+  const moduleData = moduleName === 'components' || moduleName === 'changelog'
     ? [
       ...props.picked.components,
       ...props.picked.changelog
     ] : props.picked[moduleName];
-  const excludedSuffix = utils.isZhCN(props.location.pathname)
-    ? 'en-US.md'
-    : 'zh-CN.md';
   return moduleData.filter(
-    ({ meta }) => !meta.filename.endsWith(excludedSuffix)
+    ({ meta }) => meta.filename.endsWith('.md')
   );
 }
 
 function fileNameToPath (filename) {
   const snippets = filename
-    .replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '')
+    .replace(/\.md$/i, '')
     .split('/');
   return snippets[snippets.length - 1];
 }
@@ -136,18 +132,13 @@ class MainContent extends React.Component {
     if (this.currentModule === 'react') {
       this.currentModule = 'components';
     }
-    const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
     if (prevModule !== this.currentModule) {
       const moduleData = getModuleData(nextProps);
-      const shouldOpenKeys = utils
-        .getMenuItems(
-          moduleData,
-          locale,
-          themeConfig.categoryOrder,
-          themeConfig.typeOrder
-        )
-        .map(m => m.title[locale] || m.title);
-      return shouldOpenKeys;
+      return utils.getMenuItems(
+        moduleData,
+        themeConfig.categoryOrder,
+        themeConfig.typeOrder
+      ).map(m => m.title || m.title);
     }
   }
 
@@ -164,7 +155,7 @@ class MainContent extends React.Component {
       ];
     const { disabled } = item;
     const url = item.filename
-      .replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '')
+      .replace(/\.md$/i, '')
       .toLowerCase();
     const child = !item.link ? (
       <Link
@@ -184,7 +175,7 @@ class MainContent extends React.Component {
         disabled={disabled}
         className="menu-item-link-outside"
       >
-        {text} <Icon type="export" />
+        {text} <Icon type="export"/>
       </a>
     );
 
@@ -259,6 +250,7 @@ class MainContent extends React.Component {
     const { openKeys } = this.state;
     const activeMenuItem = getActiveMenuItem(props);
     const menuItems = this.getMenuItems();
+    console.log(menuItems);
     const { prev, next } = this.getFooterNav(menuItems, activeMenuItem);
     const { localizedPageData } = props;
     const mainContainerClass = classNames('main-container', {
@@ -282,8 +274,8 @@ class MainContent extends React.Component {
           {isMobile ? (
             <MobileMenu
               iconChild={[
-                <Icon type="menu-unfold" />,
-                <Icon type="menu-fold" />
+                <Icon type="menu-unfold"/>,
+                <Icon type="menu-fold"/>
               ]}
               key="Mobile-menu"
               wrapperClassName="drawer-wrapper"
@@ -319,7 +311,7 @@ class MainContent extends React.Component {
                 demos={props.demos}
               />
             ) : (
-              <Article {...props} content={localizedPageData} />
+              <Article {...props} content={localizedPageData}/>
             )}
           </Col>
         </Row>
@@ -352,4 +344,4 @@ class MainContent extends React.Component {
   }
 }
 
-export default  MainContent;
+export default MainContent;

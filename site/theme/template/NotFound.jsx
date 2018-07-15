@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'bisheng/router';
 import * as utils from './helper/utils';
 
-export default function NotFound({ location }) {
+function NotFound({ location }) {
   return (
     <div id="page-404">
       <section>
@@ -10,10 +10,7 @@ export default function NotFound({ location }) {
         <p>
           你要找的页面不存在
           <Link
-            to={utils.getLocalizedPathname(
-              '/',
-              utils.isZhCN(location.pathname)
-            )}
+            to={utils.getLocalizedPathname('/')}
           >
             返回首页
           </Link>
@@ -27,3 +24,5 @@ export default function NotFound({ location }) {
     </div>
   );
 }
+
+export default NotFound;

@@ -1,4 +1,4 @@
-export function getMenuItems(moduleData, locale, categoryOrder, typeOrder) {
+export function getMenuItems(moduleData, categoryOrder, typeOrder) {
   const menuMeta = moduleData.map(item => item.meta);
   const menuItems = [];
   const sortFn = (a, b) => (a.order || 0) - (b.order || 0);
@@ -6,7 +6,7 @@ export function getMenuItems(moduleData, locale, categoryOrder, typeOrder) {
     if (!meta.category) {
       menuItems.push(meta);
     } else {
-      const category = meta.category[locale] || meta.category;
+      const category = meta.category;
       let group = menuItems.filter(i => i.title === category)[0];
       if (!group) {
         group = {
@@ -44,10 +44,6 @@ export function getMenuItems(moduleData, locale, categoryOrder, typeOrder) {
     .sort(sortFn);
 }
 
-export function isZhCN(pathname) {
-  return /-cn\/?$/.test(pathname);
-}
-
 export function getLocalizedPathname(path) {
   const pathname = path.startsWith('/') ? path : `/${path}`;
   if (pathname === '/') {
@@ -77,18 +73,6 @@ export function ping(callback) {
   img.onerror = () => finish('error');
   img.src = url;
   return setTimeout(() => finish('timeout'), 1500);
-}
-
-export function isLocalStorageNameSupported() {
-  const testKey = 'test';
-  const storage = window.localStorage;
-  try {
-    storage.setItem(testKey, '1');
-    storage.removeItem(testKey);
-    return true;
-  } catch (error) {
-    return false;
-  }
 }
 
 export function loadScript(src) {

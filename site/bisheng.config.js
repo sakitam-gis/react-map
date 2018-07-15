@@ -29,8 +29,6 @@ module.exports = {
   htmlTemplate: './site/theme/index.html',
   themeConfig: {
     home: '/',
-    source: 'docs',
-    title: 'motion theme',
     header: {
       github: {
         user: 'sakitam-fdd',
@@ -40,12 +38,21 @@ module.exports = {
       },
       nav: [
         { name: '示例', href: '/examples/', key: 'examples' },
-        { name: '起步', href: '/guide/index', key: 'guide' },
-        { name: 'API', href: '/api/index', key: 'api' }
+        { name: '起步', href: '/docs/guide/index', key: 'docs/guide' },
+        { name: 'API', href: '/docs/api/index', key: 'docs/api' }
       ],
       docVersions: {
         '0.0.1': '/'
       }
+    },
+    categoryOrder: {
+      'react map': 0,
+      反馈: 1,
+      Other: 6,
+      Components: 100
+    },
+    typeOrder: {
+      Other: 7
     },
     footer: {
       copyright: 'sakitam-gis'

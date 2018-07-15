@@ -1,8 +1,7 @@
 ---
 order: 0
 index: true
-chinese: 地图
-english: map
+title: 地图
 ---
 
 构造自 `maptalks.Map`, 是 react-map的核心组件，其他所有组件必须依赖此组件。
