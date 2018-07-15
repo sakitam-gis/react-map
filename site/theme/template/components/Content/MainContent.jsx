@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'bisheng/router';
-import { Row, Col, Menu, Icon } from 'antd';
+import { Row, Col, Menu, Icon, Affix } from 'antd';
 import classNames from 'classnames';
 import MobileMenu from 'rc-drawer-menu';
 import Article from './Article';
 import ComponentDoc from './ComponentDoc';
 import * as utils from '../../helper/utils';
+import { getChildren } from 'jsonml.js/lib/utils';
 
 const { SubMenu } = Menu;
 
@@ -250,7 +251,6 @@ class MainContent extends React.Component {
     const { openKeys } = this.state;
     const activeMenuItem = getActiveMenuItem(props);
     const menuItems = this.getMenuItems();
-    console.log(menuItems);
     const { prev, next } = this.getFooterNav(menuItems, activeMenuItem);
     const { localizedPageData } = props;
     const mainContainerClass = classNames('main-container', {
@@ -274,8 +274,8 @@ class MainContent extends React.Component {
           {isMobile ? (
             <MobileMenu
               iconChild={[
-                <Icon type="menu-unfold"/>,
-                <Icon type="menu-fold"/>
+                <Icon type="menu-unfold" />,
+                <Icon type="menu-fold" />
               ]}
               key="Mobile-menu"
               wrapperClassName="drawer-wrapper"
@@ -292,7 +292,9 @@ class MainContent extends React.Component {
               xs={24}
               className="main-menu"
             >
-              {menuChild}
+              <Affix className="menu-affix" offsetTop={16}>
+                {menuChild}
+              </Affix>
             </Col>
           )}
           <Col
