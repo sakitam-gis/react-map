@@ -49,5 +49,6 @@ export function getLocalizedPathname(path) {
   if (pathname === '/') {
     return '/index';
   }
+  console.log(pathname);
   return `${pathname}`;
 }

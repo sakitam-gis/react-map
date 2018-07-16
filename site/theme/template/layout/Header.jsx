@@ -96,12 +96,10 @@ export default class Header extends React.Component {
       location, themeConfig: {
         header: {
           docVersions,
-          github,
           nav
         }
       }
     } = this.props;
-    console.log(github);
     const docVersionList = {
       ...docVersions
     };
@@ -122,7 +120,7 @@ export default class Header extends React.Component {
         className="version"
         size="small"
         dropdownMatchSelectWidth={false}
-        defaultValue="1.0.0"
+        defaultValue="0.0.1"
         onChange={this.handleVersionChange}
         getPopupContainer={trigger => trigger.parentNode}
       >

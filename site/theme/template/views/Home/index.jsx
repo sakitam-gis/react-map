@@ -1,6 +1,8 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
+import Banner from './Banner';
+import Introduce from './Introduce';
 // To store style which is only for Home and has conflicts with others.
 function getStyle() {
   return `
@@ -64,6 +66,8 @@ class Home extends React.Component {
         title=""
       >
         <div className="main-wrapper">
+          <Banner {...childProps} />
+          <Introduce {...childProps} />
           <style dangerouslySetInnerHTML={{ __html: getStyle() }} />
         </div>
       </DocumentTitle>

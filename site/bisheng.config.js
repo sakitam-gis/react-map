@@ -32,10 +32,10 @@ module.exports = {
     home: '/',
     header: {
       github: {
-        user: 'sakitam-fdd',
-        repo: 'bisheng-motion-theme',
-        type: 'star',
-        count: true
+        user: 'sakitam-gis',
+        repo: 'react-map',
+        type: 'stargazers',
+        size: 'large'
       },
       nav: [
         { name: '示例', href: '/examples/index/', key: 'examples' },
@@ -44,6 +44,23 @@ module.exports = {
       ],
       docVersions: {
         '0.0.1': '/'
+      }
+    },
+    index: {
+      banner: {
+        title: 'React-Map',
+        introduce: 'react-map 是一个基于 maptalks 封装的地图组件；帮助你轻松的接入地图到 React 项目中。',
+        more: {
+          label: '了解更多',
+          link: '/examples/index/'
+        },
+        quickStart: {
+          label: '快速开始',
+          link: '/docs/guide/install'
+        }
+      },
+      introduce: {
+        title: '相关资源'
       }
     },
     categoryOrder: {
