@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import classNames from 'classnames';
 import { Row, Col, Icon, Affix, Tooltip } from 'antd';
@@ -8,10 +7,6 @@ import Demo from './Demo';
 import EditButton from './EditButton';
 
 export default class ComponentDoc extends React.Component {
-  static contextTypes = {
-    intl: PropTypes.object
-  };
-
   constructor(props) {
     super(props);
 
@@ -29,23 +24,21 @@ export default class ComponentDoc extends React.Component {
 
   render() {
     const { props } = this;
-    const { doc, location } = props;
+    const { doc, location, themeConfig } = props;
     const { content, meta } = doc;
-    const {
-      intl: { locale }
-    } = this.context;
     const demos = Object.keys(props.demos).map(key => props.demos[key]);
     const { expandAll } = this.state;
 
     const isSingleCol = meta.cols === 1;
-    const leftChildren = [];
-    const rightChildren = [];
+    // const leftChildren = []; // 支持示例的左右展示
+    // const rightChildren = [];
+    const children = [];
     const showedDemo = demos.some(demo => demo.meta.only)
       ? demos.filter(demo => demo.meta.only)
       : demos.filter(demo => demo.preview);
     showedDemo
       .sort((a, b) => a.meta.order - b.meta.order)
-      .forEach((demoData, index) => {
+      .forEach((demoData) => {
         const demoElem = (
           <Demo
             {...demoData}
@@ -53,13 +46,15 @@ export default class ComponentDoc extends React.Component {
             utils={props.utils}
             expand={expandAll}
             location={location}
+            themeConfig={themeConfig}
           />
         );
-        if (index % 2 === 0 || isSingleCol) {
-          leftChildren.push(demoElem);
-        } else {
-          rightChildren.push(demoElem);
-        }
+        children.push(demoElem);
+        // if (index % 2 === 0 || isSingleCol) {
+        //   leftChildren.push(demoElem);
+        // } else {
+        //   rightChildren.push(demoElem);
+        // }
       });
     const expandTriggerClass = classNames({
       'code-box-expand-trigger': true,
@@ -68,7 +63,7 @@ export default class ComponentDoc extends React.Component {
 
     const jumper = showedDemo.map(demo => {
       const { title } = demo.meta;
-      const localizeTitle = title[locale] || title;
+      const localizeTitle = title;
       return (
         <li key={demo.meta.id} title={localizeTitle}>
           <a href={`#${demo.meta.id}`}>{localizeTitle}</a>
@@ -79,7 +74,7 @@ export default class ComponentDoc extends React.Component {
     const { title, subtitle, filename } = meta;
     return (
       <DocumentTitle
-        title={`${subtitle || ''} ${title[locale] || title} - Ant Design`}
+        title={`${subtitle || ''} ${title}`}
       >
         <article>
           <Affix className="toc-affix" offsetTop={16}>
@@ -89,10 +84,10 @@ export default class ComponentDoc extends React.Component {
           </Affix>
           <section className="markdown">
             <h1>
-              {title[locale] || title}
+              {title}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
               <EditButton
-                title={'编辑此页'}
+                title="编辑此页"
                 filename={filename}
               />
             </h1>
@@ -104,7 +99,7 @@ export default class ComponentDoc extends React.Component {
             <h2>
               代码演示
               <Tooltip
-                title={ expandAll ? '收起全部代码' : '展开全部代码'}
+                title={expandAll ? '收起全部代码' : '展开全部代码'}
               >
                 <Icon
                   type={`${expandAll ? 'appstore' : 'appstore-o'}`}
@@ -116,18 +111,13 @@ export default class ComponentDoc extends React.Component {
           </section>
           <Row gutter={16}>
             <Col
-              span={isSingleCol ? '24' : '12'}
+              span={isSingleCol ? '24' : '24'}
               className={
                 isSingleCol ? 'code-boxes-col-1-1' : 'code-boxes-col-2-1'
               }
             >
-              {leftChildren}
+              {children}
             </Col>
-            {isSingleCol ? null : (
-              <Col className="code-boxes-col-2-1" span={12}>
-                {rightChildren}
-              </Col>
-            )}
           </Row>
           {props.utils.toReactComponent(
             [

@@ -1,14 +1,12 @@
 /* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import classNames from 'classnames';
 import LZString from 'lz-string';
 import { Icon, Tooltip } from 'antd';
 import EditButton from './EditButton';
 import BrowserFrame from '../../BrowserFrame';
-import { ping } from '../../helper/utils';
 
 function compress(string) {
   return LZString.compressToBase64(string)
@@ -17,11 +15,7 @@ function compress(string) {
     .replace(/=+$/, ''); // Remove ending '='
 }
 
-export default class Demo extends React.Component {
-  static contextTypes = {
-    intl: PropTypes.object
-  };
-
+class Demo extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,9 +39,9 @@ export default class Demo extends React.Component {
     const { codeExpand, copied, copyTooltipVisible } = this.state;
     const { expand } = this.props;
     return (
-      (codeExpand || expand) !== (nextState.codeExpand || nextProps.expand) ||
-      copied !== nextState.copied ||
-      copyTooltipVisible !== nextState.copyTooltipVisible
+      (codeExpand || expand) !== (nextState.codeExpand || nextProps.expand)
+      || copied !== nextState.copied
+      || copyTooltipVisible !== nextState.copyTooltipVisible
     );
   }
 
@@ -57,14 +51,6 @@ export default class Demo extends React.Component {
       this.anchor.click();
     }
     this.componentWillReceiveProps(this.props);
-
-    this.pingTimer = ping(status => {
-      if (status !== 'timeout' && status !== 'error') {
-        this.setState({
-          showRiddleButton: true
-        });
-      }
-    });
   }
 
   handleCodeExpand = () => {
@@ -104,7 +90,8 @@ export default class Demo extends React.Component {
       highlightedCode,
       style,
       highlightedStyle,
-      expand
+      expand,
+      themeConfig
     } = props;
     const { showRiddleButton, copied } = state;
     if (!this.liveDemo) {
@@ -121,13 +108,9 @@ export default class Demo extends React.Component {
       'code-box': true,
       expand: codeExpand
     });
-    const {
-      intl: { locale }
-    } = this.context;
-    const localizedTitle = meta.title[locale] || meta.title;
-    const localizeIntro = content[locale] || content;
+    const localizedTitle = meta.title;
     const introChildren = props.utils.toReactComponent(
-      ['div'].concat(localizeIntro)
+      ['div'].concat(content)
     );
 
     const highlightClass = classNames({
@@ -135,35 +118,29 @@ export default class Demo extends React.Component {
       'highlight-wrapper-expand': codeExpand
     });
 
-    const prefillStyle = `@import 'antd/dist/antd.css';\n\n${style ||
-      ''}`.replace(new RegExp(`#${meta.id}\\s*`, 'g'), '');
+    const prefillStyle = `\n${style || ''}`.replace(new RegExp(`#${meta.id}\\s*`, 'g'), '');
     const html = `<div id="container" style="padding: 24px"></div>
-<script>
-  var mountNode = document.getElementById('container');
-</script>`;
+    <script>
+      var mountNode = document.getElementById('container');
+    </script>`;
 
     const codepenPrefillConfig = {
-      title: `${localizedTitle} - Ant Design Demo`,
+      title: `${localizedTitle} - ${themeConfig.codepenPrefillConfig.title}`,
       html,
       js: state.sourceCode.replace(
-        /import\s+\{\s+(.*)\s+\}\s+from\s+'antd';/,
-        'const { $1 } = antd;'
+        /import\s+\{\s+(.*)\s+\}\s+from\s+'@sakitam-gis\/react-map';/,
+        themeConfig.codepenPrefillConfig.js.tmpl
       ),
       css: prefillStyle,
-      editors: '001',
-      css_external: 'https://unpkg.com/antd/dist/antd.css',
-      js_external: [
-        'react@15.x/dist/react.js',
-        'react-dom@15.x/dist/react-dom.js',
-        'moment/min/moment-with-locales.js',
-        'antd/dist/antd-with-locales.js'
-      ]
+      editors: themeConfig.codepenPrefillConfig.editors || '001',
+      css_external: themeConfig.codepenPrefillConfig.css_external || '',
+      js_external: themeConfig.codepenPrefillConfig.js_external
         .map(url => `https://unpkg.com/${url}`)
         .join(';'),
-      js_pre_processor: 'typescript'
+      js_pre_processor: themeConfig.codepenPrefillConfig.js_pre_processor || 'typescript'
     };
     const riddlePrefillConfig = {
-      title: `${localizedTitle} - Ant Design Demo`,
+      title: `${localizedTitle} - ${themeConfig.riddlePrefillConfig.title}`,
       js: state.sourceCode,
       css: prefillStyle
     };
@@ -189,11 +166,11 @@ export default class Demo extends React.Component {
         },
         'index.js': {
           content: `
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './index.css';
-${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            import ReactMap from '@sakitam-gis/react-map;
+            import './index.css';
+            ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
           `
         },
         'index.html': {
@@ -213,7 +190,7 @@ ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
               {localizedTitle}
             </a>
             <EditButton
-              title={'在 Github 上编辑此页！'}
+              title="在 Github 上编辑此页！"
               filename={meta.filename}
             />
           </div>
@@ -253,7 +230,7 @@ ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
                     name="data"
                     value={JSON.stringify(riddlePrefillConfig)}
                   />
-                  <Tooltip title={'45'}>
+                  <Tooltip title="45">
                     <input
                       type="submit"
                       value="Create New Riddle with Prefilled Data"
@@ -272,7 +249,7 @@ ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
                   name="data"
                   value={JSON.stringify(codepenPrefillConfig)}
                 />
-                <Tooltip title={'在 CodePen 中打开'}>
+                <Tooltip title="在 CodePen 中打开">
                   <input
                     type="submit"
                     value="Create New Pen with Prefilled Data"
@@ -290,7 +267,7 @@ ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
                   name="parameters"
                   value={compress(JSON.stringify(codesanboxPrefillConfig))}
                 />
-                <Tooltip title={'在 CodeSandbox 中打开'}>
+                <Tooltip title="在 CodeSandbox 中打开">
                   <input
                     type="submit"
                     value="Create New Sandbox with Prefilled Data"
@@ -337,3 +314,5 @@ ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
     );
   }
 }
+
+export default Demo;

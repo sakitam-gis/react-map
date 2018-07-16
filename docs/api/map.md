@@ -20,7 +20,7 @@ $ import { Map } from '@sakitam-gis/react-map';
 import * as PropTypes from 'prop-types';
 import '../../dist/react-map.css';
 import './map.less';
-import { Map, TileLayer } from '../../'
+import { Map, TileLayer } from '@sakitam-gis/react-map'
 class Index extends React.Component {
   static propTypes = {
     location: PropTypes.object

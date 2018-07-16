@@ -17,7 +17,7 @@ export default collect(async nextProps => {
 
   const pageDataPromise = typeof pageData === 'function'
     ? pageData()
-    : (pageData || pageData.index || pageData.index)();
+    : (pageData && pageData.index)();
   const demosFetcher = nextProps.utils.get(nextProps.data, [
     ...pageDataPath,
     'demo'

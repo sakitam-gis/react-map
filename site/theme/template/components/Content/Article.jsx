@@ -3,7 +3,6 @@ import DocumentTitle from 'react-document-title';
 import { getChildren } from 'jsonml.js/lib/utils';
 import { Timeline, Affix } from 'antd';
 import EditButton from './EditButton';
-import { ping } from '../../helper/utils';
 
 class Article extends React.Component {
   componentDidMount () {
@@ -11,21 +10,9 @@ class Article extends React.Component {
   }
 
   componentDidUpdate () {
-    const links = [...document.querySelectorAll('.outside-link.internal')];
-    if (links.length === 0) {
-      return;
-    }
-    this.pingTimer = ping(status => {
-      if (status !== 'timeout' && status !== 'error') {
-        links.forEach(link => (link.style.display = 'block'));
-      } else {
-        links.forEach(link => link.parentNode.removeChild(link));
-      }
-    });
   }
 
   componentWillUnmount () {
-    clearTimeout(this.pingTimer);
   }
 
   getArticle (article) {
@@ -59,7 +46,7 @@ class Article extends React.Component {
     const { meta, description } = content;
     const { title, subtitle, filename } = meta;
     return (
-      <DocumentTitle title={`${title} - Ant Design`}>
+      <DocumentTitle title={`${title} - ReactMap`}>
         <article
           className="markdown"
           ref={node => {

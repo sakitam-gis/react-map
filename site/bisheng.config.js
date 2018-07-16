@@ -21,6 +21,7 @@ module.exports = {
   port: 7007,
   source: {
     docs: './docs',
+    examples: './examples',
     changelog: [
       'CHANGELOG.md'
     ]
@@ -37,9 +38,9 @@ module.exports = {
         count: true
       },
       nav: [
-        { name: '示例', href: '/examples/', key: 'examples' },
-        { name: '起步', href: '/docs/guide/index', key: 'docs/guide' },
-        { name: 'API', href: '/docs/api/index', key: 'docs/api' }
+        { name: '示例', href: '/examples/index/', key: 'examples' },
+        { name: '起步', href: '/docs/guide/install', key: 'docs/guide' },
+        { name: 'API', href: '/docs/api/map', key: 'docs/api' }
       ],
       docVersions: {
         '0.0.1': '/'
@@ -48,11 +49,32 @@ module.exports = {
     categoryOrder: {
       'react map': 0,
       反馈: 1,
-      Other: 6,
-      Components: 100
+      Other: 2,
+      Examples: 100
     },
     typeOrder: {
+      Examples: 0,
       Other: 7
+    },
+    codepenPrefillConfig: {
+      js: {
+        regex: '@sakitam-gis/react-map',
+        tmpl: 'const { $1 } = ReactMap;'
+      },
+      title: 'ReactMap',
+      editors: '001',
+      css_external: '',
+      js_external: [
+        'react@16.x/dist/react.js',
+        'react-dom@16.x/dist/react-dom.js'
+      ],
+      js_pre_processor: 'typescript'
+    },
+    riddlePrefillConfig: {
+      title: 'ReactMap'
+    },
+    codesanboxPrefillConfig: {
+      title: 'ReactMap'
     },
     footer: {
       copyright: 'sakitam-gis'
@@ -64,7 +86,8 @@ module.exports = {
   },
   webpackConfig(config) {
     config.resolve.alias = {
-      site: path.join(process.cwd(), 'src'),
+      '@sakitam-gis/react-map': path.join(process.cwd(), 'src'),
+      site: path.join(process.cwd(), 'site'),
       'react-router': 'react-router/umd/ReactRouter',
     };
 

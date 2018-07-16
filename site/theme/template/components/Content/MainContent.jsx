@@ -7,30 +7,26 @@ import MobileMenu from 'rc-drawer-menu';
 import Article from './Article';
 import ComponentDoc from './ComponentDoc';
 import * as utils from '../../helper/utils';
-import { getChildren } from 'jsonml.js/lib/utils';
 
 const { SubMenu } = Menu;
 
 function getActiveMenuItem (props) {
   const { children } = props.params;
-  return (
-    (children && children.replace('-cn', ''))
-    || props.location.pathname.replace(/(^\/|-cn$)/g, '')
-  );
+  return (children || props.location.pathname);
 }
 
 function getModuleData (props) {
   const { pathname } = props.location;
-  const moduleName = /^\/?components/.test(pathname)
-    ? 'components'
+  const moduleName = /^\/?examples/.test(pathname)
+    ? 'examples'
     : pathname
       .split('/')
       .filter(item => item)
       .slice(0, 2)
       .join('/');
-  const moduleData = moduleName === 'components' || moduleName === 'changelog'
+  const moduleData = moduleName === 'examples' || moduleName === 'changelog'
     ? [
-      ...props.picked.components,
+      ...props.picked.examples,
       ...props.picked.changelog
     ] : props.picked[moduleName];
   return moduleData.filter(
@@ -40,7 +36,7 @@ function getModuleData (props) {
 
 function fileNameToPath (filename) {
   const snippets = filename
-    .replace(/\.md$/i, '')
+    .replace(/(\/index)?\.md$/i, '')
     .split('/');
   return snippets[snippets.length - 1];
 }
@@ -129,9 +125,9 @@ class MainContent extends React.Component {
     const { themeConfig } = nextProps;
     const { pathname } = nextProps.location;
     const prevModule = this.currentModule;
-    this.currentModule = pathname.replace(/^\//).split('/')[1] || 'components';
-    if (this.currentModule === 'react') {
-      this.currentModule = 'components';
+    this.currentModule = pathname.replace(/^\//).split('/')[1] || 'examples';
+    if (this.currentModule === 'docs') {
+      this.currentModule = 'examples';
     }
     if (prevModule !== this.currentModule) {
       const moduleData = getModuleData(nextProps);
@@ -156,12 +152,12 @@ class MainContent extends React.Component {
       ];
     const { disabled } = item;
     const url = item.filename
-      .replace(/\.md$/i, '')
+      .replace(/(\/index)?\.md$/i, '')
       .toLowerCase();
     const child = !item.link ? (
       <Link
         to={utils.getLocalizedPathname(
-          /^components/.test(url) ? `${url}/` : url,
+          /^examples/.test(url) ? `${url}/` : url,
           true
         )}
         disabled={disabled}
@@ -176,7 +172,7 @@ class MainContent extends React.Component {
         disabled={disabled}
         className="menu-item-link-outside"
       >
-        {text} <Icon type="export"/>
+        {text} <Icon type="export" />
       </a>
     );
 

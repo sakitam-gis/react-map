@@ -24,10 +24,10 @@ module.exports = {
     return nodePath.endsWith('/demo');
   },
   pick: {
-    components(markdownData) {
+    examples(markdownData) {
       const { filename } = markdownData.meta;
       if (
-        !/^components/.test(filename) || /[/\\]demo$/.test(path.dirname(filename))
+        !/^examples/.test(filename) || /[/\\]demo$/.test(path.dirname(filename))
       ) {
         return;
       }
@@ -73,7 +73,7 @@ module.exports = {
         component: contentTmpl
       },
       {
-        path: 'components/:children/',
+        path: 'examples/:children/',
         component: contentTmpl
       }
     ]
