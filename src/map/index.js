@@ -18,6 +18,9 @@ class Map extends React.Component {
     renderer: PropTypes.string,
     maxVisualPitch: PropTypes.number,
     maxPitch: PropTypes.number,
+    fov: PropTypes.number,
+    pitch: PropTypes.number,
+    bearing: PropTypes.number,
     centerCross: PropTypes.bool,
     zoomInCenter: PropTypes.bool,
     fpsOnInteracting: PropTypes.number,
@@ -27,6 +30,7 @@ class Map extends React.Component {
     layerCanvasLimitOnInteracting: PropTypes.number,
     layer: PropTypes.arrayOf(PropTypes.object),
     baseLayer: PropTypes.arrayOf(PropTypes.object),
+    spatialReference: PropTypes.object,
     events: PropTypes.objectOf(PropTypes.func)
   };
 
@@ -34,11 +38,12 @@ class Map extends React.Component {
     map: PropTypes.instanceOf(maptalks.Map)
   };
 
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
-      isLoad: false
+      isLoad: false,
+      isMounted: false
     };
 
     /**
@@ -52,34 +57,66 @@ class Map extends React.Component {
     this.events = {};
   }
 
-  getChildContext() {
+  getChildContext () {
     return {
       map: this.map
     };
   }
 
-  // componentWillReceiveProps(nextProps)
-  // shouldComponentUpdate(nextProps, nextState)
+  shouldComponentUpdate () {
+    const { isMounted } = this.state;
+    return !isMounted;
+  }
+
   // componentWillUpdate(nextProps, nextState)
   // componentDidUpdate(prevProps, prevState)
 
-  componentWillReceiveProps(nextProps) {
-    const { center, zoom } = this.props;
+  componentWillReceiveProps (nextProps) {
+    const {
+      center, zoom, spatialReference, cursor,
+      maxExtent, maxZoom, minZoom,
+      pitch, bearing, fov
+    } = this.props;
     if (!this.map) {
       return null;
     }
 
-    if (!isequal(nextProps.center, center)) {
-      this.map.setCenter(nextProps.center);
+    if (!isequal(nextProps.center, center) || !isequal(nextProps.zoom, zoom)) {
+      if (!isequal(nextProps.center, center) && isequal(nextProps.zoom, zoom)) {
+        this.map.setCenter(nextProps.center);
+      }
+      if (isequal(nextProps.center, center) && !isequal(nextProps.zoom, zoom)) {
+        this.map.setZoom(nextProps.zoom);
+      }
+      if (!isequal(nextProps.center, center) && !isequal(nextProps.zoom, zoom)) {
+        this.map.setCenterAndZoom(nextProps.center, nextProps.zoom);
+      }
     }
 
-    if (!isequal(nextProps.zoom, zoom)) {
-      this.map.setZoom(nextProps.zoom);
+    if (!isequal(nextProps.spatialReference, spatialReference)) {
+      this.map.setSpatialReference(nextProps.zoom);
     }
-    // set layers
-    this.setBaseLayer(nextProps.baseLayer);
-    this.setLayers(nextProps.layers);
-
+    if (!isequal(nextProps.cursor, cursor)) {
+      this.map.setCursor(nextProps.cursor);
+    }
+    if (!isequal(nextProps.maxExtent, maxExtent)) {
+      this.map.setMaxExtent(nextProps.maxExtent);
+    }
+    if (!isequal(nextProps.maxZoom, maxZoom)) {
+      this.map.setMaxZoom(nextProps.maxZoom);
+    }
+    if (!isequal(nextProps.minZoom, minZoom)) {
+      this.map.setMinZoom(nextProps.minZoom);
+    }
+    if (!isequal(nextProps.fov, fov)) {
+      this.map.setFov(nextProps.fov);
+    }
+    if (!isequal(nextProps.bearing, bearing)) {
+      this.map.setBearing(nextProps.bearing);
+    }
+    if (!isequal(nextProps.pitch, pitch)) {
+      this.map.setPitch(nextProps.pitch);
+    }
     return null;
   }
 
@@ -115,11 +152,14 @@ class Map extends React.Component {
     this.container = x;
   };
 
-  componentDidMount() {
-    const { center, zoom, events } = this.props;
+  componentDidMount () {
+    const { center, zoom, events, fov, bearing, pitch } = this.props;
     const options = {
       zoom,
-      center
+      center,
+      fov: Math.max(0.01, Math.min(59, fov)),
+      bearing,
+      pitch
     };
     this.map = new maptalks.Map(this.container, options);
     if (this.map.isLoaded()) {
@@ -134,13 +174,21 @@ class Map extends React.Component {
         }
       }
     }
+    this.setState({
+      isMounted: true
+    });
   }
 
-  componentWillUnmount() {
-    // console.log('des');
+  componentWillUnmount () {
+    if (this.map) {
+      this.map = null;
+      this.setState({
+        isMounted: false
+      });
+    }
   }
 
-  render() {
+  render () {
     const { isLoad } = this.state;
     const { className, children } = this.props;
     return (

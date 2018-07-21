@@ -33,7 +33,7 @@ module.exports = {
         enforce: 'pre',
         include: [
           utils.resolve('src'),
-          utils.resolve('examples'),
+          utils.resolve('view'),
           utils.resolve('test')
         ],
         options: {
@@ -46,7 +46,7 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           utils.resolve('src'),
-          utils.resolve('examples'),
+          utils.resolve('view'),
           utils.resolve('test'),
         ],
         options: {

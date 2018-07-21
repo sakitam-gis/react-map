@@ -1,10 +1,10 @@
 {
   "name": "@sakitam-gis/react-map",
   "version": "0.0.1",
-  "title": "",
-  "description": "",
-  "homepage": "",
-  "author": "",
+  "title": "react-map",
+  "description": "a react map base on maptalks",
+  "homepage": "https://sakitam-gis.github.io/react-map/",
+  "author": "sakitam-fdd <smilefdd@gmail.com>",
   "keywords": [
     "react",
     "react-component",
@@ -145,6 +145,7 @@
     "lint-fix:demo": "eslint-tinker ./examples/*/demo/*.md",
     "clean": "shx rm -rf _site",
     "start": "npm run clean && cross-env NODE_ENV=development bisheng start -c ./site/bisheng.config.js",
+    "start:view": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --config build/webpack.view.conf.js",
     "build": "npm run clean && bisheng build --ssr -c ./site/bisheng.config.js",
     "deploy": "bisheng gh-pages --push-only && npm run clean"
   },
