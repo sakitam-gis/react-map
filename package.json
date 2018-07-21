@@ -43,7 +43,7 @@
     "maptalks": "^0.40.5",
     "prop-types": "^15.6.2",
     "rc-queue-anim": "^1.6.5",
-    "rc-scroll-anim": "^2.5.3",
+    "rc-scroll-anim": "^2.5.4",
     "rc-tween-one": "^2.2.2",
     "react-lazy-load": "^3.0.13"
   },

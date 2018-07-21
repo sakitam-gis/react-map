@@ -42,9 +42,30 @@ class Banner extends React.PureComponent {
           </Map>
           <ScrollParallax location="banner" className="banner-bg" animation={{ playScale: [1, 1.5], rotate: 0 }} />
         </div>
-        <QueueAnim className={`${className} page`} type="alpha" delay={150}>
+        <QueueAnim
+          className={`${className} page`}
+          style={{
+            padding: isMobile ? '0 0' : '0 24px'
+          }}
+          type="alpha"
+          delay={150}
+        >
           {isMobile && (
-            <div className="img-wrapper" key="image" />)}
+            <div className="img-wrapper" key="image">
+              <Map
+                className="map-content"
+                center={[-0.113049, 51.498568]}
+                zoom={8}
+              >
+                <TileLayer
+                  id="layer"
+                  renderer="gl"
+                  urlTemplate="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+                  subdomains={['a', 'b', 'c', 'd']}
+                />
+              </Map>
+            </div>)
+          }
           <QueueAnim
             className="text-wrapper"
             key="text"

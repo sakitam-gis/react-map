@@ -71,13 +71,13 @@ import '@sakitam-gis/dist/react-map.css';
 
 ## 链接
 
-- [首页](http://ant.design/)
+- [首页](https://sakitam-gis.github.io/react-map/)
 
 ## 如何贡献
 
-在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/ant-design/ant-design/blob/master/.github/CONTRIBUTING.md)。
-如果你希望参与贡献，欢迎 [Pull Request](https://github.com/ant-design/ant-design/pulls)，
-或给我们 [报告 Bug](http://new-issue.ant.design/)。
+在任何形式的参与前，请先阅读 [贡献者文档](https://github.com/sakitam-gis/react-map/.github/CONTRIBUTING.md)。
+如果你希望参与贡献，欢迎 [Pull Request](https://github.com/sakitam-gis/react-map/pulls)，
+或给我们 [报告 Bug](https://github.com/sakitam-gis/react-map/issues)。
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、
   [《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 

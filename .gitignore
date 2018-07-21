@@ -10,3 +10,5 @@ lib
 es
 
 package-lock.json
+/yarn.lock
+/_site/
