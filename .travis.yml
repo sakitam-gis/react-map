@@ -1,0 +1,18 @@
+language: node_js
+node_js: node
+cache:
+  directories:
+    - node_modules
+install: npm install
+script:
+- npm run dist
+- npm run dist:common
+- npm run build
+after_script:
+- cd ./_site
+- git init
+- git config --global user.name 'sakitam-fdd'
+- git config --global user.email 'smilefdd@gmail.com'
+- git add .
+- git commit -m "update website"
+- git push --force --quiet "https://${TRAVIS_GITHUB}@github.com/sakitam-gis/react-map" master:gh-pages
