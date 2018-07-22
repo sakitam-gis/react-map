@@ -127,8 +127,10 @@ class Demo extends React.Component {
     const codepenPrefillConfig = {
       title: `${localizedTitle} - ${themeConfig.codepenPrefillConfig.title}`,
       html,
-      // eslint-disable-next-line
-      js: state.sourceCode.replace(/import\s+\{\s+(.*)\s+\}\s+from\s+\'@sakitam-gis\/react-map\';?/, 'const { $1 } = ReactMap;'),
+      js: state.sourceCode
+        // eslint-disable-next-line
+        .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+\'@sakitam-gis\/react-map\';?/, 'const { $1 } = ReactMap;')
+        .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'antd';?/, 'const { $1 } = antd;'),
       css: prefillStyle,
       editors: themeConfig.codepenPrefillConfig.editors || '001',
       css_external: themeConfig.codepenPrefillConfig.css_external || '',
@@ -144,7 +146,7 @@ class Demo extends React.Component {
     };
     const dependencies = state.sourceCode.split('\n').reduce(
       (acc, line) => {
-        const matches = line.match(/import .+? from '(.+)';$/);
+        const matches = line.match(/import .+? from '(.+)';?$/);
         if (matches && matches[1]) {
           acc[matches[1]] = 'latest';
         }
@@ -166,6 +168,7 @@ class Demo extends React.Component {
           content: `
 import React from 'react';
 import ReactDOM from 'react-dom';
+${dependencies.antd ? "import 'antd/dist/antd.css';" : ''}
 import '@sakitam-gis/react-map/dist/react-map.css';
 import './index.css';
 ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}

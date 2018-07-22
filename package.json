@@ -1,6 +1,6 @@
 {
   "name": "@sakitam-gis/react-map",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "title": "react-map",
   "description": "a react map base on maptalks",
   "homepage": "https://sakitam-gis.github.io/react-map/",
@@ -136,9 +136,9 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node build/build.js",
-    "dist": "cross-env NODE_ENV=production node build/build.js",
-    "dist:common": "cross-env NODE_ENV=common node build/build.js",
+    "dev": "cross-env NODE_ENV=development LIB=true node build/build.js",
+    "dist": "cross-env NODE_ENV=production LIB=true node build/build.js",
+    "dist:common": "cross-env NODE_ENV=common LIB=true node build/build.js",
     "prettify": "prettier --write src/*.js src/*.jsx src/**/*.js src/**/*.jsx",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --fix --ext .js,.jsx src",

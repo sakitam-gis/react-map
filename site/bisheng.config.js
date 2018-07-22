@@ -76,10 +76,14 @@ module.exports = {
     codepenPrefillConfig: {
       title: 'ReactMap',
       editors: '001',
-      css_external: 'https://unpkg.com/@sakitam-gis/react-map/dist/react-map.css',
+      css_external: [
+        'https://unpkg.com/antd/dist/antd.css',
+        'https://unpkg.com/@sakitam-gis/react-map/dist/react-map.css'
+      ],
       js_external: [
         'react@16.x/umd/react.development.js',
         'react-dom@16.x/umd/react-dom.development.js',
+        'antd/dist/antd-with-locales.js',
         '@sakitam-gis/react-map/dist/react-map.js'
       ],
       js_pre_processor: 'typescript'

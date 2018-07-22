@@ -63,10 +63,11 @@ class Map extends React.Component {
     };
   }
 
-  shouldComponentUpdate () {
-    const { isMounted } = this.state;
-    return !isMounted;
-  }
+  // shouldComponentUpdate (nextProps) {
+  //   // const { isMounted } = this.state;
+  //   const { children } = nextProps;
+  //   return children.length > 0;
+  // }
 
   // componentWillUpdate(nextProps, nextState)
   // componentDidUpdate(prevProps, prevState)
@@ -189,11 +190,11 @@ class Map extends React.Component {
   }
 
   render () {
-    const { isLoad } = this.state;
+    const { isMounted, isLoad } = this.state;
     const { className, children } = this.props;
     return (
       <div ref={this.setRef} className={className}>
-        {isLoad ? children : null}
+        {isMounted && isLoad ? children : null}
       </div>
     );
   }

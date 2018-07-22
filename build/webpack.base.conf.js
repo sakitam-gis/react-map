@@ -52,6 +52,31 @@ module.exports = {
         ],
         options: {
           cacheDirectory: true,
+          plugins: process.env.LIB ? [
+            'transform-react-remove-prop-types',
+            'transform-class-properties',
+            'transform-object-assign',
+            'transform-object-rest-spread'
+          ] : [
+            'react-hot-loader/babel',
+            'transform-react-remove-prop-types',
+            'transform-class-properties',
+            'transform-object-assign',
+            'transform-object-rest-spread',
+            [
+              'transform-runtime',
+              {
+                'polyfill': false
+              }
+            ],
+            [
+              'import',
+              {
+                'libraryName': 'antd',
+                'style': false
+              }
+            ]
+          ]
         },
       },
       {
