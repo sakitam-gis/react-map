@@ -147,7 +147,8 @@
     "start": "npm run clean && cross-env NODE_ENV=development bisheng start -c ./site/bisheng.config.js",
     "start:view": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --config build/webpack.view.conf.js",
     "build": "npm run clean && bisheng build --ssr -c ./site/bisheng.config.js",
-    "deploy": "bisheng gh-pages --push-only && npm run clean"
+    "deploy": "bisheng gh-pages --push-only && npm run clean",
+    "publish": "npm publish --access=public"
   },
   "engines": {
     "node": ">= 7.0.0",

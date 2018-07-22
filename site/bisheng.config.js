@@ -74,16 +74,13 @@ module.exports = {
       Other: 7
     },
     codepenPrefillConfig: {
-      js: {
-        regex: '@sakitam-gis/react-map',
-        tmpl: 'const { $1 } = ReactMap;'
-      },
       title: 'ReactMap',
       editors: '001',
-      css_external: '',
+      css_external: 'https://unpkg.com/@sakitam-gis/react-map/dist/react-map.css',
       js_external: [
-        'react@16.x/dist/react.js',
-        'react-dom@16.x/dist/react-dom.js'
+        'react@16.x/umd/react.development.js',
+        'react-dom@16.x/umd/react-dom.development.js',
+        '@sakitam-gis/react-map/dist/react-map.js'
       ],
       js_pre_processor: 'typescript'
     },

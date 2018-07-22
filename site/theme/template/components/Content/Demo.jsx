@@ -118,7 +118,7 @@ class Demo extends React.Component {
       'highlight-wrapper-expand': codeExpand
     });
 
-    const prefillStyle = `\n${style || ''}`.replace(new RegExp(`#${meta.id}\\s*`, 'g'), '');
+    const prefillStyle = `@import '@sakitam-gis/react-map/dist/react-map.css';\n\n${style || ''}`.replace(new RegExp(`#${meta.id}\\s*`, 'g'), '');
     const html = `<div id="container" style="padding: 24px"></div>
     <script>
       var mountNode = document.getElementById('container');
@@ -127,10 +127,8 @@ class Demo extends React.Component {
     const codepenPrefillConfig = {
       title: `${localizedTitle} - ${themeConfig.codepenPrefillConfig.title}`,
       html,
-      js: state.sourceCode.replace(
-        /import\s+\{\s+(.*)\s+\}\s+from\s+'@sakitam-gis\/react-map';/,
-        themeConfig.codepenPrefillConfig.js.tmpl
-      ),
+      // eslint-disable-next-line
+      js: state.sourceCode.replace(/import\s+\{\s+(.*)\s+\}\s+from\s+\'@sakitam-gis\/react-map\';?/, 'const { $1 } = ReactMap;'),
       css: prefillStyle,
       editors: themeConfig.codepenPrefillConfig.editors || '001',
       css_external: themeConfig.codepenPrefillConfig.css_external || '',
@@ -166,11 +164,11 @@ class Demo extends React.Component {
         },
         'index.js': {
           content: `
-            import React from 'react';
-            import ReactDOM from 'react-dom';
-            import ReactMap from '@sakitam-gis/react-map;
-            import './index.css';
-            ${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '@sakitam-gis/react-map/dist/react-map.css';
+import './index.css';
+${state.sourceCode.replace('mountNode', "document.getElementById('container')")}
           `
         },
         'index.html': {

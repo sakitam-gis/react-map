@@ -1,7 +1,47 @@
 import 'maptalks/dist/maptalks.css';
 import Map from './map';
+import {
+  TileLayer,
+  OverlayLayer,
+  VectorLayer
+} from './layers';
+import {
+  Circle,
+  Geometry,
+  LineString,
+  Marker,
+  MultiLineString,
+  MultiPoint,
+  MultiPolygon,
+  Polygon,
+} from './geometry';
 
-export { Map };
+export {
+  Map,
+  TileLayer,
+  OverlayLayer,
+  VectorLayer,
+  Circle,
+  Geometry,
+  LineString,
+  Marker,
+  MultiLineString,
+  MultiPoint,
+  MultiPolygon,
+  Polygon,
+};
 
-export * from './layers';
-export * from './geometry';
+export default {
+  Map,
+  TileLayer,
+  OverlayLayer,
+  VectorLayer,
+  Circle,
+  Geometry,
+  LineString,
+  Marker,
+  MultiLineString,
+  MultiPoint,
+  MultiPolygon,
+  Polygon,
+};

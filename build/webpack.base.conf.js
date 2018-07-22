@@ -7,11 +7,12 @@ const _target = process.env.NODE_ENV === 'common' ? 'commonjs2' : 'umd2';
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    'react-map': path.resolve(__dirname, '../index.js'),
+    'react-map': path.resolve(__dirname, '../src/index.js'),
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: `[name].${filename}js`,
+    library: 'ReactMap',
     libraryTarget: _target
   },
   resolve: {
