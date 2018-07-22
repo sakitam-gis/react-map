@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- Polyfills -->
+    <!--[if IE]>
+    <script src="https://as.alipayobjects.com/g/component/??es6-shim/0.35.1/es6-sham.min.js,es6-shim/0.35.1/es6-shim.min.js"></script>
+    <![endif]-->
+    <link rel="icon" href="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/react-map/index.css"/>
+    <style id="nprogress-style">
+      #nprogress { display: none }
+    </style>
+    <!--[if lte IE 10]>
+      <script
+        src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,media-match/2.0.2/media.match.min.js"></script>
+    <![endif]-->
+  <link href="/react-map/index.02aa6f-1.css" rel="stylesheet"><link href="/react-map/index.02aa6f-2.css" rel="stylesheet"></head>
+  <body>
+    <div id="react-content">
+      <div class="page-wrapper" data-reactroot=""><header id="header" class="clearfix"><div class="ant-row"><div class="ant-col-xs-24 ant-col-sm-24 ant-col-md-6 ant-col-lg-5 ant-col-xl-5 ant-col-xxl-4"><a id="logo" href="/index"><h4 style="display:inline-block;font-size:18px">React-Map</h4></a></div><div class="ant-col-xs-0 ant-col-sm-0 ant-col-md-18 ant-col-lg-19 ant-col-xl-19 ant-col-xxl-20"><div id="search-box"><i class="anticon anticon-search"></i><input type="text" placeholder="在文档中搜索" class="ant-input"/></div><div class="ant-select-sm version ant-select ant-select-enabled"><div class="ant-select-selection
+            ant-select-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0"><div class="ant-select-selection__rendered"><div class="ant-select-selection-selected-value" title="0.0.1" style="display:block;opacity:1">0.0.1</div></div><span class="ant-select-arrow" style="user-select:none;-webkit-user-select:none" unselectable="on"><b></b></span></div></div><ul class="ant-menu menu-site ant-menu-light ant-menu-root ant-menu-horizontal" id="nav" role="menu"><li class="ant-menu-item" role="menuitem"><a href="/examples/index/">示例</a></li><li class="ant-menu-item ant-menu-item-selected" role="menuitem"><a href="/docs/guide/install">起步</a></li><li class="ant-menu-item" role="menuitem"><a href="/docs/api/map">API</a></li></ul></div></div></header><div class="main-wrapper"><div class="ant-row"><div class="main-menu ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-6 ant-col-xl-5 ant-col-xxl-4"><div class="menu-affix"><div class=""><ul class="ant-menu aside-container menu-site ant-menu-light ant-menu-root ant-menu-inline" role="menu"><li class="ant-menu-item ant-menu-item-selected" role="menuitem" style="padding-left:40px"><a href="/docs/guide/install">安装</a></li><li class="ant-menu-item" role="menuitem" style="padding-left:40px"><a href="/docs/guide/feedback">反馈</a></li></ul></div></div></div><div class="main-container ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-18 ant-col-xl-19 ant-col-xxl-20"><article class="markdown"><h1>安装<a class="edit-button" href="https://github.com/sakitam-gis/react-map/edit/master/docs/guide/install.md" target="_blank" rel="noopener noreferrer"><i class="anticon anticon-edit"></i></a></h1><section class="markdown"><p>react-map 是一个基于 maptalks 封装的地图组件；帮助你轻松的接入地图到 React 项目中。</p></section><div class="toc-affix"><div class=""><ul class="toc"><li><a class="bisheng-toc-h2" href="#特性" title="特性">特性</a></li><li><a class="bisheng-toc-h2" href="#支持环境" title="支持环境">支持环境</a></li><li><a class="bisheng-toc-h2" href="#安装" title="安装">安装</a></li><li><a class="bisheng-toc-h2" href="#示例" title="示例">示例</a></li><li><a class="bisheng-toc-h2" href="#链接" title="链接">链接</a></li><li><a class="bisheng-toc-h2" href="#如何贡献" title="如何贡献">如何贡献</a></li></ul></div></div><section class="markdown"><h2 id="特性"><span>特性</span><a href="#特性" class="anchor">#</a></h2><ul><li><p>一个基于maptalks的React组件</p></li><li><p>易用，易扩展，开箱即用。</p></li></ul><h2 id="支持环境"><span>支持环境</span><a href="#支持环境" class="anchor">#</a></h2><ul><li><p>现代浏览器和 IE9 及以上, 仅仅IE11 支持3D渲染。</p></li><li><p>移动浏览器。</p></li><li><p>Electron。</p></li></ul><h2 id="安装"><span>安装</span><a href="#安装" class="anchor">#</a></h2><h3 id="使用-npm-或-yarn-安装"><span>使用 npm 或 yarn 安装</span><a href="#使用-npm-或-yarn-安装" class="anchor">#</a></h3><p><strong>我们推荐使用 npm 或 yarn 的方式进行开发</strong>，
+不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，
+享受整个生态圈和工具链带来的诸多好处。</p><pre class="language-bash"><code>$ <span class="token function">npm</span> <span class="token function">install</span> @sakitam-gis/react-map --save</code></pre><pre class="language-bash"><code>$ yarn add @sakitam-gis/react-map</code></pre><h3 id="浏览器引入"><span>浏览器引入</span><a href="#浏览器引入" class="anchor">#</a></h3><p>在浏览器中使用 <code>script</code> 和 <code>link</code> 标签直接引入文件，并使用全局变量 <code>ReactMap</code>。</p><p>我们在 npm 发布包内的 <code>@sakitam-gis/react-map/dist</code> 目录下提供了 <code>react-map.js</code> <code>react-map.css</code>
+ 以及 <code>react-map.min.js</code> <code>react-map.min.css</code>。
+ 或 <a href="https://unpkg.com/@sakitam-gis/react-map/dist/">UNPKG</a> 进行下载。</p><h2 id="示例"><span>示例</span><a href="#示例" class="anchor">#</a></h2><pre class="language-jsx"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Map<span class="token punctuation">,</span> TileLayer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@sakitam-gis/react-map'</span><span class="token punctuation">;</span>
+ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Map</span>
+  <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>map-content<span class="token punctuation">"</span></span>
+  <span class="token attr-name">center</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.113049</span><span class="token punctuation">,</span> <span class="token number">51.498568</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span>
+  <span class="token attr-name">zoom</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>zoom<span class="token punctuation">}</span></span>
+  <span class="token attr-name">events</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+    onload<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>handleMapLoad
+  <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TileLayer</span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>layer<span class="token punctuation">"</span></span>
+    <span class="token attr-name">renderer</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>gl<span class="token punctuation">"</span></span>
+    <span class="token attr-name">urlTemplate</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png<span class="token punctuation">"</span></span>
+    <span class="token attr-name">subdomains</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">,</span> <span class="token string">'d'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span>
+  <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Map</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> mountNode<span class="token punctuation">)</span></code></pre><p>引入样式：</p><pre class="language-jsx"><code><span class="token keyword">import</span> <span class="token string">'@sakitam-gis/dist/react-map.css'</span><span class="token punctuation">;</span></code></pre><h2 id="链接"><span>链接</span><a href="#链接" class="anchor">#</a></h2><ul><li><p><a href="https://sakitam-gis.github.io/react-map/">首页</a></p></li></ul><h2 id="如何贡献"><span>如何贡献</span><a href="#如何贡献" class="anchor">#</a></h2><p>在任何形式的参与前，请先阅读 <a href="https://github.com/sakitam-gis/react-map/.github/CONTRIBUTING.md">贡献者文档</a>。
+如果你希望参与贡献，欢迎 <a href="https://github.com/sakitam-gis/react-map/pulls">Pull Request</a>，
+或给我们 <a href="https://github.com/sakitam-gis/react-map/issues">报告 Bug</a>。</p><blockquote><p>强烈推荐阅读 <a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way">《提问的智慧》</a>、
+  <a href="https://github.com/seajs/seajs/issues/545">《如何向开源社区提问题》</a> 和 
+  <a href="http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html">《如何有效地报告 Bug》</a>、
+  <a href="https://zhuanlan.zhihu.com/p/25795393">《如何向开源项目提交无法解答的问题》</a>，更好的问题更容易获得帮助。</p></blockquote></section><section class="markdown api-container"></section></article></div></div><div class="ant-row"><div class="ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-18 ant-col-lg-offset-6 ant-col-xl-19 ant-col-xl-offset-5 ant-col-xxl-20 ant-col-xxl-offset-4"><section class="prev-next-nav"><a class="next-page" href="/docs/guide/feedback">反馈</a></section></div></div></div><footer id="footer"><div class="bottom-bar">Made with <span class="heart">❤</span> by <!-- -->sakitam-gis</div></footer></div>
+    </div>
+    <link rel="stylesheet/less" type="text/css" href="/react-map/color.less"/>
+    <script src="/react-map/common.js"></script>
+    <script src="/react-map/index.js"></script>
+  <script type="text/javascript" src="/react-map/runtime.893142.js"></script><script type="text/javascript" src="/react-map/common.05d550.js"></script><script type="text/javascript" src="/react-map/index.7ac16a.js"></script></body>
+</html>
