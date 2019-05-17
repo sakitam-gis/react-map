@@ -5,7 +5,7 @@ react-map 是一个基于 maptalks 封装的地图组件；帮助你轻松的接
 [![Build Status](https://travis-ci.org/sakitam-gis/react-map.svg?branch=master)](https://www.travis-ci.org/sakitam-gis/react-map)
 ![JS gzip size](http://img.badgesize.io/https://unpkg.com/@sakitam-gis/react-map/dist/react-map.js?compression=gzip&label=gzip%20size:%20JS)
 [![Npm package](https://img.shields.io/npm/v/@sakitam-gis/react-map.svg)](https://www.npmjs.org/package/@sakitam-gis/react-map)
-[![GitHub stars](https://img.shields.io/github/stars/sakitam-gis/react-map.svg)](https://github.com/sakitam-gis/react-map/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/sakitam-gis/react-map.svg)](https://github.com/sakitam-gis/react-map/stargazers) [![Greenkeeper badge](https://badges.greenkeeper.io/sakitam-gis/react-map.svg)](https://greenkeeper.io/)
 
 ## 特性
 
